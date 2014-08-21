@@ -1,5 +1,5 @@
 body{
-	background: rgb(248,248,245);
+	background: rgb(192,222,237);
 }
 
 #head-menu{float: right;}
@@ -44,9 +44,7 @@ hero-site a:hover{text-decoration: none;}
 .foot{
 	width: 100%;
 	height: 100px;
-	border-top: 1px solid rgb(229,229,229);
-	bottom:0px;
-	position: absolute;
+	border-top: 2px solid rgb(229,229,229);
 }
 
 #heading-color{background: #FFFFFF;}
@@ -75,3 +73,136 @@ body > #wrap {
 	padding-top: 20px;
 }
 
+.user-card{
+	width: 1000px;
+	margin:0 auto;
+	margin-top: 60px;
+}
+
+.left-info{
+	float: left;
+	width: 670px;
+	height: 300px;
+	
+}
+
+.right-info{
+	float: right;
+	width: 320px;
+	height: 300px;
+	background: #FFFFFF;
+}
+
+.user-background{
+	height: 95px;
+	border-bottom: 1px solid rgb(225,237,242);
+}
+
+.profile-content{}
+
+.user-photo{
+	float: left;
+	margin-left: 10px;
+	margin-top: -25px;
+	position: relative;
+}
+
+.basic-profile{
+	float: left;
+	margin-left: 10px;
+}
+
+.basic-profile a,.detail-state-lable span a{
+	text-decoration: none;
+	color: #000000;
+}
+
+.basic-profile span a{color: rgb(185,168,169);}
+
+.basic-profile a:hover,.detail-state-lable span a:hover,.full-name a:hover{
+	color: rgb(42,100,150);
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+.basic-profile span{line-height: 1px;}
+
+.statelable{
+	float: left;
+	width: 300px;
+	margin-left: 10px;
+	margin-top: 15px;
+	text-align: center;
+	border-bottom: 1px solid rgb(191,224,236);
+}
+
+.detail-state-lable{
+	float: left;
+	width: 90px;
+}
+
+.detail-state-lable:hover,.main-card:hover{background: rgb(245,248,240);}
+
+.content-head-card{
+	border-bottom: 1px solid rgb(191,224,236);
+	height: 50px;
+	padding-left: 10px;
+	line-height: 2px;
+	margin-top: -20px;
+	background: #FFFFFF;
+}
+
+.content-head-card h3{padding-top: 15px;}
+
+.main-card{
+	background: #FFFFFF;
+	margin-bottom: 5px;
+	width: 670px;
+	height: 200px;
+}
+
+.main-card-photo{
+	float: left;
+	padding-left: 10px;
+	margin-right: 10px;
+	margin-top: 20px;
+}
+
+.main-card-detail-info{
+	float: left;
+	height: 150px;
+	width: 570px;
+}
+
+.full-name{
+	margin-top: 15px;
+	font-size: 18px;
+}
+
+.full-name a{color: #000000;}
+
+.user-blog-text{
+	overflow: hidden;
+	height: 115px;
+}
+
+.at-account{color: rgb(96,96,96);font-size: 14px;}
+
+.main-card-footer{padding-top: 170px;}
+
+.main-card-footer ul{list-style: none;}
+
+.main-card-footer li{
+	float: right;
+	margin-right: 10px;
+}
+
+.main-card-footer span{
+	color: #8899A6;
+	font-size: 14px;
+}
+
+.main-card-extension{
+	float: left;
+	margin-left: -25px;
+}

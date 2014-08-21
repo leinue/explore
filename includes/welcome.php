@@ -1,38 +1,3 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>探索</title>
-
-    <!-- Bootstrap -->
-    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-
-  </head>
-  <body>
-
-  <menu>
-   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <img alt="Explore" src="img/logo.png" width="25" height="25">
-        <a class="navbar-brand" href="#">探索</a>
-      </a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" id="head-menu">
-        <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-      </ul>
-    </div>
-     </div>
-   </nav>
-  </menu>
-
    <content>
    	<div class="front-welcome">
    		<div class="hero-title">
@@ -83,17 +48,3 @@
    		</div>   		
    	</div>
    </content>
-
-   <footer class="foot">
-		<ul>
-			<li>探索,通过不同视角观看世界</li>
-			<li>© 2014 Explore</li>
-			<li><a href="">关于</a></li>
-			<li><a href="http://ivydom.com" target="_blank">博客</a></li>
-		</ul>
-   </footer>
-
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  </body>
-</html>
