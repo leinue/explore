@@ -1,17 +1,16 @@
 <?php
+//a.com/column.php?column=explore
+//a.com/column.php?column=hotaeras
+//a.com/people.php?people=ivydom
+//a.com/column.php?column=notifications
+//a.com/column.php?column=setting
 require("functions/config.php");
 
-$islogin=0;
-
-if($islogin){
-	$pageTitle="探索";
-}else{
-	$pageTitle="登录";
-}
+$islogin=1;
 
 require("includes/header.php");
 
-if($islogin){
+if(!$islogin){
 	require("includes/welcome.php");
 }else{
 	require("includes/main.php");}

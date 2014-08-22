@@ -77,9 +77,9 @@
 			</div>
 			<div class="hot-info-text">
 				<ul>
-					<li>1111</li>
-					<li>11111</li>
-					<li>111111</li>
+					<li><a href="">1111</a></li>
+					<li><a href="">11111</a></li>
+					<li><a href="">111111</li>
 				</ul>
 			</div>
 		</div>

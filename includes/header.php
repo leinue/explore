@@ -17,25 +17,24 @@
    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="index.php">
         <img alt="Explore" src="img/logo.png" width="25" height="25"> 探索</a>
     </div>
 
 <?php
-if(!$islogin){
+if($islogin){
 ?>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">主页</a></li>
-        <li><a href="#">发现</a></li>
-        <li><a href="#">热门地方</a></li>
-        <li><a href="#">找人</a></li>
+        <li <?php if($pageTitle=="探索") echo 'class="active"'; ?>><a href="index.php">主页</a></li>
+        <li <?php if($pageTitle=="发现 - 探索") echo 'class="active"'; ?>><a href="column.php?column=explore">发现</a></li>
+        <li <?php if($pageTitle=="热门地区 - 探索") echo 'class="active"'; ?>><a href="column.php?column=hotaeras">热门地方</a></li>
       </ul>      
       <ul class="nav navbar-nav" id="head-menu-right">
-        <li><a href="#">个人中心</a></li>
-        <li><a href="#">设置</a></li>
-        <li><a href="#">消息</a></li>
-        <li><a href="#">退出</a></li>
+        <li <?php if($pageTitle=="ivydom - 探索") echo 'class="active"'; ?>><a href="people.php?people=ivydom">个人中心</a></li>
+        <li <?php if($pageTitle=="设置 - 探索") echo 'class="active"'; ?>><a href="column.php?column=setting">设置</a></li>
+        <li <?php if($pageTitle=="消息通知 - 探索") echo 'class="active"'; ?>><a href="column.php?column=notifications">消息</a></li>
+        <li ><a href="#">退出</a></li>
       </ul>
     </div>
 <?php
