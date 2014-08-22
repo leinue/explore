@@ -87,7 +87,7 @@ body > #wrap {
 .right-info{
 	float: right;
 	width: 320px;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 }
 
 .user-background{
@@ -133,14 +133,15 @@ body > #wrap {
 	float: left;
 	width: 300px;
 	margin-left: 10px;
-	margin-top: 15px;
+	margin-top: 20px;
 	text-align: center;
-	border-bottom: 1px solid rgb(191,224,236);
 }
 
 .detail-state-lable{
 	float: left;
 	width: 90px;
+	margin-right: 10px;
+	overflow: hidden;
 }
 
 .detail-state-lable:hover,.main-card:hover,.notification-main-card:hover
@@ -218,12 +219,12 @@ body > #wrap {
 
 .hot-info-heading{
 	border-bottom: 1px solid rgb(191,224,236);
-	padding-top: 5px;
-	height: 30px;
+	padding-top: 12px;
+	height: 50px;
 }
 
 .hot-info-heading span{
-	font-size: 16px;
+	font-size: 20px;
 	margin-left: 10px;
 }
 
@@ -238,11 +239,11 @@ body > #wrap {
 
 .notification-menu-first,.notification-menu-second{
 	background: #FFFFFF;
-	height: 40px;
+	height: 50px;
 	width:290px;
 	font-size: 20px;
 	padding-left: 10px;
-	padding-top: 5px;
+	padding-top: 12px;
 }
 
 .notification-menu-first:hover,.notification-menu-second:hover{
@@ -258,6 +259,81 @@ body > #wrap {
 	overflow: hidden;
 }
 
-.notification-main-card-footer{
-	padding-top: 50px;
+.people-user-background-detail,.people-user-lib{
+	margin: 0 auto;
+	width: 740px;
+	height: 315px;
+	background: #FFFFFF;
+	margin-top:60px;
+}
+
+.people-user-heading{
+	width: 740px;
+	height: 265px;
+	border-bottom: 1px solid rgb(225,232,237);
+}
+
+.people-user-heading-left{
+	float: left;
+	width: 260px;
+	height: 100%;
+	font-size: 12px;
+	text-align: center;
+	
+}
+
+.people-user-heading-right{
+	float: left;
+	width: 480px;
+	height: 100%;
+}
+
+.people-user-heading-left-detail{
+	margin: 0 auto;
+	padding:15px 15px 30px;
+	width: 230px;
+	margin-top: -265px;
+}
+
+.people-user-detail{color: #FFFFFF;}
+
+.people-user-name{
+	font-size: 20px;
+	padding-top: 20px;
+}
+
+.people-user-description,.people-user-accessed-record{
+	padding-top: 20px;
+	text-align: center;
+}
+
+.people-user-footer #xxxxxxxx{
+	text-decoration: none;
+	font-size: 16px;
+	margin-top: 5px;
+	margin-left: 30%;
+}
+
+.people-user-footer #xxxxxxx li{color: #737373;}
+
+.people-user-lib{
+	height: 600px;
+	margin-top:30px;
+	background: rgb(192,222,237);
+}
+
+.people-lib-left,.people-lib-right{
+	float: left;
+	width: 360px;
+	height: 200px;
+	margin-right: 20px;
+	background: #FFFFFF;
+	border-top: 6px solid rgb(118,167,250);
+	margin-bottom: 20px;
+}
+
+.people-lib-right{
+	float: right;
+	margin-right: 0px;
+	height: 250px;
 }
