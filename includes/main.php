@@ -10,7 +10,7 @@
 		<div class="main-card">
 
 			<div class="main-card-photo">
-				<img src="http://i60.tinypic.com/2wg4s5w.jpg" alt="ivydom" width="70" height="70" class="img-rounded"> 
+				<img src="user/ivydom/photo.jpg" alt="ivydom" width="70" height="70" class="img-rounded"> 
 			</div>
 
 			<div class="main-card-detail-info">
@@ -44,12 +44,12 @@
 
 	<div class="right-info">
 		<div class="user-background">
-			<img src="http://i60.tinypic.com/20futrb.jpg" alt="ivydom" width="320" height="95">
+			<img src="user/ivydom/background.jpg" alt="ivydom" width="320" height="95">
 		</div>
 
 		<div class="profile-content">
 		    <div class="user-photo">
-		    	<img src="http://i59.tinypic.com/2wg4s5w.jpg" alt="ivydom" class="img-thumbnail" width="75" height="75">
+		    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="75" height="75">
 		    </div>
 		    <div class="basic-profile">
 		    	<a ref=""><h4>ivydom</h4></a>
@@ -72,7 +72,16 @@
 		</div>
 		
 		<div class="right-hot-info">
-			dsdsdds
+			<div class="hot-info-heading">
+				<span>热门地方</span>
+			</div>
+			<div class="hot-info-text">
+				<ul>
+					<li>1111</li>
+					<li>11111</li>
+					<li>111111</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>

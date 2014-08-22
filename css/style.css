@@ -1,8 +1,6 @@
-body{
-	background: rgb(192,222,237);
-}
+body{background: rgb(192,222,237);}
 
-#head-menu{float: right;}
+#head-menu-right{float: right;}
 
 .front-welcome{
 	width: 850px;
@@ -89,16 +87,20 @@ body > #wrap {
 .right-info{
 	float: right;
 	width: 320px;
-	height: 300px;
-	background: #FFFFFF;
+	margin-bottom: 20px;
 }
 
 .user-background{
 	height: 95px;
 	border-bottom: 1px solid rgb(225,237,242);
+	background: #FFFFFF;
 }
 
-.profile-content{}
+.profile-content{
+	width: 320px;
+	height: 155px;
+	background: #FFFFFF;
+}
 
 .user-photo{
 	float: left;
@@ -205,4 +207,28 @@ body > #wrap {
 .main-card-extension{
 	float: left;
 	margin-left: -25px;
+}
+
+.right-hot-info{
+	margin-top: 5px;
+	background: #FFFFFF;
+	height: 200px;
+}
+
+.hot-info-heading{
+	border-bottom: 1px solid rgb(191,224,236);
+	padding-top: 5px;
+	height: 30px;
+}
+
+.hot-info-heading span{
+	font-size: 16px;
+	margin-left: 10px;
+}
+
+.hot-info-text ul{list-style: none;}
+
+.hot-info-text ul{
+	padding-left: 10px;
+	padding-top: 10px;
 }
