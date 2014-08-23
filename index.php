@@ -1,11 +1,11 @@
 <?php
+
+require("functions/config.php");
 //a.com/column.php?column=explore
 //a.com/column.php?column=hotaeras
 //a.com/people.php?people=ivydom
 //a.com/column.php?column=notifications
 //a.com/column.php?column=setting
-require("functions/config.php");
-
 $islogin=1;
 
 require("includes/header.php");
