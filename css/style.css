@@ -316,6 +316,8 @@ body > #wrap {
 
 .people-user-footer #xxxxxxx li{color: #737373;}
 
+.people-user-footer a{text-decoration: none;color:#737373;}
+
 /***********************userlib*************************/
 
 .people-user-lib{
@@ -375,6 +377,11 @@ body > #wrap {
 	margin-top: -45px;
 }
 
+.people-lib-twitter-detail-name a{
+	text-decoration: none;
+	color: #000000;
+}
+
 .people-lib-twitter-detail-time-type{margin-left: 60px;color: rgb(191,191,191);}
 
 .people-lib-card-twiiter-type:hover{color: rgb(66,127,237);cursor: pointer;}
@@ -384,9 +391,23 @@ body > #wrap {
 	margin-bottom: 15px;
 }
 
-.people-lib-twitter-footer-right{
-	float: right;
+.people-lib-twitter-footer-right{float: right;}
+
+.people-lib-send-msg-menu{
+	list-style: none;
+	font-size: 20px;
+	padding-top: 15px;
+	padding-left: 0;
+	color: rgb(162,162,162);
+	margin-left: 2px;
+	margin-bottom: 20px;
 }
+
+.people-lib-send-msg-menu li:hover{color: rgb(100,100,100);cursor: pointer;}
+
+.people-lib-send-msg-menu li{float:left;margin-right: 35px;}
+
+.people-lib-send-msg-button{float: right;margin-top: -25px;}
 
 /*************userlib-twitter***************/
 

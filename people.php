@@ -46,6 +46,18 @@ require("includes/header.php");
 <div class="people-user-lib">
 
 	<div class="people-lib-left">
+		<div class="people-lib-main-card">
+			<textarea class="form-control" rows="3"></textarea>
+			<div class="people-lib-send-msg">
+				<ul class="people-lib-send-msg-menu">
+					<li title="图片"><span class="glyphicon glyphicon-picture"></span></li>
+					<li title="#话题"><span class="glyphicon glyphicon-comment"></span></li>
+					<li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li>
+					<li title="链接(支持音乐/视频)"><span class="glyphicon glyphicon-link"></span></li>
+				</ul>
+				<div class="people-lib-send-msg-button"><button type="button" class="btn btn-success btn-sm">发布</button></div>
+			</div>
+		</div>
 
 		<div class="people-lib-main-card">
 			<div class="lib-card-heading">基本信息</div>
@@ -79,7 +91,7 @@ require("includes/header.php");
 			    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46">
 				</div>
 				<div class="people-lib-twitter-detail">
-					<div class="people-lib-twitter-detail-name">ivydom</div>
+					<div class="people-lib-twitter-detail-name"><a href="">ivydom</a></div>
 					<div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">私密分享</span>  -  2013年4月14日</div>
 				</div>
 			</div>
@@ -106,13 +118,16 @@ require("includes/header.php");
 			    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46">
 				</div>
 				<div class="people-lib-twitter-detail">
-					<div class="people-lib-twitter-detail-name">ivydom</div>
+					<div class="people-lib-twitter-detail-name"><a href="">ivydom</a></div>
 					<div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">私密分享</span>  -  2013年4月14日</div>
 				</div>
 			</div>
 
 			<div class="people-lib-main-card-twitter-content">
-一个桌面级的操作系统代码规模在千万行数量级，如果加上配套软件，总规模应该超过一亿行，如果再加上一个完整的软件生态系统，那么总规模应该不少于十亿行。那是不是投钱投人就够了？不是。			</div>
+				<span>一个桌面级的操作系统代码规模在千万行数量级，如果加上配套软件，总规模应该超过一亿行，如果再加上一个完整的软件生态系统，那么总规模应该不少于十亿行。那是不是投钱投人就够了？不是.</span>		
+			    <img src="user/ivydom/background.jpg" alt="ivydom" width="120" height="120" />
+			</div>
+
 			<div class="people-lib-main-card-twitter-footer">
 				<div class="btn-group">
   					<button type="button" class="btn btn-default">赞</button>
