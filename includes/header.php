@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="../js/verify.js"></script>
 
   </head>
   <body>

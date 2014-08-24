@@ -1,3 +1,7 @@
+/**
+Explore Project main CSS
+*/
+
 body{background: rgb(192,222,237);}
 
 #head-menu-right{float: right;}
@@ -307,14 +311,23 @@ body > #wrap {
 	text-align: center;
 }
 
-.people-user-footer #xxxxxxxx{
+.user-nav-pills{
 	text-decoration: none;
 	font-size: 16px;
-	margin-top: 5px;
+	margin-top: 15px;
 	margin-left: 30%;
+	list-style: none;
 }
 
-.people-user-footer #xxxxxxx li{color: #737373;}
+.user-nav-pills li{
+	color: #737373;
+	float: left;
+	margin-right: 20px;
+}
+
+.user-nav-pills li:hover{
+	border-bottom: 2px solid rgb(118,167,250);
+}
 
 .people-user-footer a{text-decoration: none;color:#737373;}
 
@@ -382,7 +395,19 @@ body > #wrap {
 	color: #000000;
 }
 
-.people-lib-twitter-detail-time-type{margin-left: 60px;color: rgb(191,191,191);}
+.lib-twitter-detail-name-right{
+	float: right;
+	font-weight:normal;
+}
+
+.lib-twitter-detail-name-right span{color: rgb(191,191,191);}
+
+.lib-twitter-detail-name-right span:hover{cursor: pointer;}
+
+.people-lib-twitter-detail-time-type{
+	margin-left: 60px;
+	color: rgb(191,191,191);
+}
 
 .people-lib-card-twiiter-type:hover{color: rgb(66,127,237);cursor: pointer;}
 
@@ -403,12 +428,26 @@ body > #wrap {
 	margin-bottom: 20px;
 }
 
-.people-lib-send-msg-menu li:hover{color: rgb(100,100,100);cursor: pointer;}
+.people-lib-send-msg-menu li:hover{
+	color: rgb(100,100,100);cursor: pointer;}
 
 .people-lib-send-msg-menu li{float:left;margin-right: 35px;}
 
 .people-lib-send-msg-button{float: right;margin-top: -25px;}
 
+.lib-send-msg-button-left{
+	margin-right: 5px;
+	color: rgb(118,167,250);
+}
+
+.lib-send-msg-button-left:hover{
+	text-decoration: underline;cursor: pointer;}
+
+.comment-input-enabled{
+	padding-top: 15px;
+	visibility: hidden;
+	display: none;/*block*/
+}
 /*************userlib-twitter***************/
 
 /***********************userlib*************************/

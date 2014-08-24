@@ -34,11 +34,11 @@ require("includes/header.php");
 	</div>
 
 	<div class="people-user-footer">
-		<ul class="nav nav-pills" role="tablist" id="xxxxxxxx">
-  			<li role="presentation"><a href="#">去过 0</a></li>
-  			<li role="presentation"><a href="#">粉丝 0</a></li>
-  			<li role="presentation"><a href="#">关注 0</a></li>
-  			<li role="presentation"><a href="#">信息 0</a></li>
+		<ul class="user-nav-pills" id="xxxxxxxx">
+  			<li role="presentation"><a href="">去过 0</a></li>
+  			<li role="presentation"><a href="">粉丝 0</a></li>
+  			<li role="presentation"><a href="">关注 0</a></li>
+  			<li role="presentation"><a href="">信息 0</a></li>
 		</ul>
 	</div>
 </div>
@@ -47,7 +47,7 @@ require("includes/header.php");
 
 	<div class="people-lib-left">
 		<div class="people-lib-main-card">
-			<textarea class="form-control" rows="3"></textarea>
+			<textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea>
 			<div class="people-lib-send-msg">
 				<ul class="people-lib-send-msg-menu">
 					<li title="图片"><span class="glyphicon glyphicon-picture"></span></li>
@@ -55,12 +55,12 @@ require("includes/header.php");
 					<li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li>
 					<li title="链接(支持音乐/视频)"><span class="glyphicon glyphicon-link"></span></li>
 				</ul>
-				<div class="people-lib-send-msg-button"><button type="button" class="btn btn-success btn-sm">发布</button></div>
+				<div class="people-lib-send-msg-button"><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
 			</div>
 		</div>
 
 		<div class="people-lib-main-card">
-			<div class="lib-card-heading">基本信息</div>
+			<div class="lib-card-heading">基本信息<span class="lib-card-heading-right"><a href="">修改</a></span></div>
 			<div class="lib-card-content">
 				<ul>
 					<li><span class="glyphicon glyphicon-envelope"></span> 23333333@qq.com</li>
@@ -85,13 +85,21 @@ require("includes/header.php");
 	</div>
 
 	<div class="people-lib-right">
+
 		<div class="people-lib-main-card">
 			<div class="people-lib-main-card-twitter-heading">
 				<div class="people-lib-twitter-heading-photo">
 			    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46">
 				</div>
 				<div class="people-lib-twitter-detail">
-					<div class="people-lib-twitter-detail-name"><a href="">ivydom</a></div>
+					<div class="people-lib-twitter-detail-name">
+						<a href="">ivydom</a>
+						<div class="lib-twitter-detail-name-right">
+							<div class="dropdown">
+								<span class="caret"></span>
+							</div>
+						</div>
+					</div>
 					<div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">私密分享</span>  -  2013年4月14日</div>
 				</div>
 			</div>
@@ -106,12 +114,23 @@ require("includes/header.php");
  					<button type="button" class="btn btn-default">收藏</button>
 				</div>
 				<div class="people-lib-twitter-footer-right">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="评论">
+					<div class="input-group" id="original-comment-layout">
+						<input type="text" class="form-control" onfocus="deployCommentLayout(this)" placeholder="评论">
     				</div>
 				</div>
+				<div class="comment-input-enabled" id="id-comment-input-enabled">
+					<textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea>
+					<div class="people-lib-send-msg">
+						<ul class="people-lib-send-msg-menu">
+							<li title="#话题"><span class="glyphicon glyphicon-comment"></span></li>
+							<li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li>
+						</ul>
+						<div class="people-lib-send-msg-button"><span onclick="packupCommentLayout()" class="lib-send-msg-button-left">↑收起</span><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
+					</div>
+    			</div>
 			</div>
 		</div>
+
 		<div class="people-lib-main-card">
 			<div class="people-lib-main-card-twitter-heading">
 				<div class="people-lib-twitter-heading-photo">
@@ -135,12 +154,44 @@ require("includes/header.php");
  					<button type="button" class="btn btn-default">收藏</button>
 				</div>
 				<div class="people-lib-twitter-footer-right">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="评论">
+					<div class="input-group" id="original-comment-layout">
+						<input type="text" class="form-control" onfocus="deployCommentLayout(this)" placeholder="评论">
     				</div>
 				</div>
+				<div class="comment-input-enabled" id="id-comment-input-enabled">
+					<textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea>
+					<div class="people-lib-send-msg">
+						<ul class="people-lib-send-msg-menu">
+							<li title="#话题"><span class="glyphicon glyphicon-comment"></span></li>
+							<li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li>
+						</ul>
+						<div class="people-lib-send-msg-button"><span onclick="packupCommentLayout()" class="lib-send-msg-button-left">↑收起</span><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
+					</div>
+    			</div>
 			</div>
 		</div>
+
 	</div>
 
 </div>
+
+<script>
+	var twitterContent;
+	twitterContent=document.getElementById('twitter-content').innerHTML;
+	
+	if(twitterContent.length==0){document.getElementById('btn-twitter-send').disabled="true";}
+
+	function alterBtnStatus(){document.getElementById('btn-twitter-send').disabled=false;}
+
+	function deployCommentLayout(x){
+		x.style.visibility='hidden';
+		document.getElementById('id-comment-input-enabled').style.visibility='visible';
+		document.getElementById('id-comment-input-enabled').style.display='block';
+	}
+
+	function packupCommentLayout(){
+		document.getElementById('original-comment-layout').style.visibility='visible';
+		document.getElementById('id-comment-input-enabled').style.visibility='hidden';
+		document.getElementById('id-comment-input-enabled').style.display='none';
+	}
+</script>
