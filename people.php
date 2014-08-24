@@ -44,10 +44,88 @@ require("includes/header.php");
 </div>
 
 <div class="people-user-lib">
+
 	<div class="people-lib-left">
-		
+
+		<div class="people-lib-main-card">
+			<div class="lib-card-heading">基本信息</div>
+			<div class="lib-card-content">
+				<ul>
+					<li><span class="glyphicon glyphicon-envelope"></span> 23333333@qq.com</li>
+					<li><span class="glyphicon glyphicon-map-marker"></span> 中二之峰学院</li>
+					<li><span class="glyphicon glyphicon-user"></span> ♂</li>
+					<li><span class="glyphicon glyphicon-briefcase"></span> 中二病患者</li>
+					<li><span class="glyphicon glyphicon-credit-card"></span> 专注拾荒三十年</li>					
+				</ul>
+			</div>
+		</div>
+		<div class="people-lib-main-card">
+			<div class="lib-card-heading">去过的地方 <span class="lib-card-heading-right">目前:蛤蛤</span></div>
+			<div class="lib-card-content">
+				<ul class="location-accessed">
+					<li>大连 |</li>
+					<li>北京 |</li>
+					<li>上海 |</li>
+					<li>南京</li>
+				</ul>			
+			</div>
+		</div>
 	</div>
+
 	<div class="people-lib-right">
-		
+		<div class="people-lib-main-card">
+			<div class="people-lib-main-card-twitter-heading">
+				<div class="people-lib-twitter-heading-photo">
+			    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46">
+				</div>
+				<div class="people-lib-twitter-detail">
+					<div class="people-lib-twitter-detail-name">ivydom</div>
+					<div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">私密分享</span>  -  2013年4月14日</div>
+				</div>
+			</div>
+
+			<div class="people-lib-main-card-twitter-content">
+				中国人均收入世界排名：1960年第78名，1970年第82，1976 年84，1980年第94，1990年第105，2008年第106，2010年第127；但中国GDP世界排名：1978年第15名，1990年第10，1995年第7，2000年第6，2007年第4，2010年第2。这是一个什么样的中国梦！？﻿
+			</div>
+			<div class="people-lib-main-card-twitter-footer">
+				<div class="btn-group">
+  					<button type="button" class="btn btn-default">赞</button>
+  					<button type="button" class="btn btn-default">踩</button>
+ 					<button type="button" class="btn btn-default">收藏</button>
+				</div>
+				<div class="people-lib-twitter-footer-right">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="评论">
+    				</div>
+				</div>
+			</div>
+		</div>
+		<div class="people-lib-main-card">
+			<div class="people-lib-main-card-twitter-heading">
+				<div class="people-lib-twitter-heading-photo">
+			    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46">
+				</div>
+				<div class="people-lib-twitter-detail">
+					<div class="people-lib-twitter-detail-name">ivydom</div>
+					<div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">私密分享</span>  -  2013年4月14日</div>
+				</div>
+			</div>
+
+			<div class="people-lib-main-card-twitter-content">
+一个桌面级的操作系统代码规模在千万行数量级，如果加上配套软件，总规模应该超过一亿行，如果再加上一个完整的软件生态系统，那么总规模应该不少于十亿行。那是不是投钱投人就够了？不是。			</div>
+			<div class="people-lib-main-card-twitter-footer">
+				<div class="btn-group">
+  					<button type="button" class="btn btn-default">赞</button>
+  					<button type="button" class="btn btn-default">踩</button>
+ 					<button type="button" class="btn btn-default">收藏</button>
+				</div>
+				<div class="people-lib-twitter-footer-right">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="评论">
+    				</div>
+				</div>
+			</div>
+		</div>
 	</div>
+
 </div>

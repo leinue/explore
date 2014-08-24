@@ -29,7 +29,7 @@ body{background: rgb(192,222,237);}
 	font-size: 5em;
 }
 
-hero-site a:hover{text-decoration: none;}
+.hero-site a:hover{text-decoration: none;}
 
 .hero-tagline {
     font-size: 250%;
@@ -316,24 +316,78 @@ body > #wrap {
 
 .people-user-footer #xxxxxxx li{color: #737373;}
 
+/***********************userlib*************************/
+
 .people-user-lib{
-	height: 600px;
 	margin-top:30px;
 	background: rgb(192,222,237);
 }
 
 .people-lib-left,.people-lib-right{
 	float: left;
-	width: 360px;
-	height: 200px;
 	margin-right: 20px;
-	background: #FFFFFF;
+}
+
+.people-lib-right{margin-right: 0px;}
+
+.people-lib-main-card{
 	border-top: 6px solid rgb(118,167,250);
+	padding: 15px;
+	width: 360px;
+	background: #FFFFFF;
 	margin-bottom: 20px;
 }
 
-.people-lib-right{
-	float: right;
-	margin-right: 0px;
-	height: 250px;
+.lib-card-heading{
+	font-weight: bold;
+	border-bottom: 1px solid rgb(218,218,218);
 }
+
+.lib-card-heading-right{float: right;}
+
+.lib-card-content ul{
+	padding-top: 15px;
+	list-style: none;
+	padding-left: 0px;
+}
+
+.lib-card-content li{
+	color: rgb(102,102,102);
+	margin-bottom: 5px;
+}
+
+.lib-card-content span{color: rgb(198,198,198);}
+
+.location-accessed li{display: inline;}
+
+
+/*************userlib-twitter***************/
+
+.people-lib-main-card-twitter-heading{
+	border-bottom: 1px solid rgb(218,218,218);
+	height: 60px;
+}
+
+.people-lib-twitter-detail-name{
+	margin-left: 60px;
+	font-weight: bold;
+	font-size: 16px;
+	margin-top: -45px;
+}
+
+.people-lib-twitter-detail-time-type{margin-left: 60px;color: rgb(191,191,191);}
+
+.people-lib-card-twiiter-type:hover{color: rgb(66,127,237);cursor: pointer;}
+
+.people-lib-main-card-twitter-content{
+	padding-top: 15px;
+	margin-bottom: 15px;
+}
+
+.people-lib-twitter-footer-right{
+	float: right;
+}
+
+/*************userlib-twitter***************/
+
+/***********************userlib*************************/
