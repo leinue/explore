@@ -416,7 +416,7 @@ body > #wrap {
 	border-top: 6px solid rgb(118,167,250);
 }
 
-.setting-face,.setting-background,.setting-profile,.setting-email,.setting-password
+.setting-face,.setting-background,.setting-profile,.setting-email,.setting-password,.setting-notification
 	{padding: 15px;}
 
 .setting-face-background-title{margin-right: 5px;}
@@ -449,9 +449,19 @@ body > #wrap {
 /*************setting-password**************/
 
 .setting-card-footer-password{
-	margin-top: -45px;float: right;
-}
+	margin-top: -45px;float: right;}
 
 /*************setting-password**************/
+
+/************setting-notification***********/
+
+.setting-notification-checkbox{margin-left: 20px;}
+
+.setting-card-footer-notification{
+	float: right;
+	margin-top: -40px;
+}
+
+/************setting-notification***********/
 
 /***********************setting*************************/

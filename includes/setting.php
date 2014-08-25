@@ -89,6 +89,32 @@
 			</div>
 		</div>
 
+		<div class="setting-user-card">
+			<div class="setting-notification">
+				<div class="lib-card-heading">消息通知</div>
+				<div class="setting-notification-checkbox">
+					<label class="checkbox">
+  						<input type="checkbox" id="inlineCheckbox1" value="option1"> 有人关注我
+					</label>
+					<label class="checkbox">
+  						<input type="checkbox" id="inlineCheckbox1" value="option1"> 有人提到我
+					</label>
+					<label class="checkbox">
+  						<input type="checkbox" id="inlineCheckbox1" value="option1"> 有人赞了我的分享
+					</label>
+					<label class="checkbox">
+  						<input type="checkbox" id="inlineCheckbox1" value="option1"> 有人评论了我的分享
+					</label>
+					<label class="checkbox">
+  						<input type="checkbox" id="inlineCheckbox1" value="option1"> 我不接受任何消息
+					</label>
+				</div>
+				<div class="setting-card-footer-notification">
+    				<button type="button" class="btn btn-default">保存更改</button>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	
 </div>
