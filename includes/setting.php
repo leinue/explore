@@ -120,11 +120,11 @@
 	<div class="setting-card-user-mid">
 		<div class="lib-card-heading">欢迎 <a href="">ivydom</a></div>
 		<div class="setting-card-user-welcome-content">
-			 <ul>
-			 	<li><span class="glyphicon glyphicon-heart"></span> <a href="">我的收藏</a></li>
-			 	<li><span class="glyphicon glyphicon-pencil"></span> <a href="">邀请朋友来探索</a></li>
-			 	<li><span class="glyphicon glyphicon-file"></span> <a href="">我的草稿</a></li>	 
-			 </ul>
+			<ul>
+			 	<a href=""><li><span class="glyphicon glyphicon-heart"></span> 我的收藏</li></a>
+			 	<a href=""><li><span class="glyphicon glyphicon-pencil"></span> 邀请朋友来探索</li></a>
+			 	<a href=""><li><span class="glyphicon glyphicon-file"></span> 我的草稿</li></a>
+			</ul>
 		</div>
 	</div>
 	

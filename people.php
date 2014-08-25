@@ -205,3 +205,7 @@ require("includes/header.php");
 
 	function atSomeone(){addContent('twitter-content','@');}
 </script>
+
+<?php
+require("includes/footer.php");
+?>

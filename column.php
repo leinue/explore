@@ -33,5 +33,5 @@ if($islogin){
 require("includes/header.php");
 require("includes/$pageRequired");
 
-//require("includes/footer.php");
+require("includes/footer.php");
 ?>

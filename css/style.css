@@ -1,5 +1,5 @@
 /**
-Explore Project main CSS
+Main CSS of Explore Project 
 */
 
 body{background: rgb(192,222,237);}
@@ -37,12 +37,6 @@ body{background: rgb(192,222,237);}
     color: #666;
 }
 
-.foot{
-	width: 100%;
-	height: 100px;
-	border-top: 2px solid rgb(229,229,229);
-}
-
 #heading-color{background: #FFFFFF;}
 
 .help-block-personal,.setting-help-block{color:rgb(115,115,163);}
@@ -50,17 +44,20 @@ body{background: rgb(192,222,237);}
 html, body, #wrap {height: 50%;}
 
 body > #wrap {
-	height: auto; 
-	min-height: 50%;
+	height: 100px; 
+	min-height: 100px;
 }
 
 #main {padding-bottom: 100px;}
 
-.foot {
+.foot{
 	position: relative; 
 	margin-top: -100px;
 	height: 100px;
 	clear:both;
+	width: 100%;
+	height: 100px;
+	border-top: 2px solid rgb(229,229,229);
 }
 
 .foot ul{
@@ -71,10 +68,10 @@ body > #wrap {
 .user-card{
 	width: 1000px;margin:0 auto;margin-top: 60px;}
 
-.left-info{
-	float: left;width: 670px;height: 300px;}
+.left-info,.explore-left{
+	float: left;width: 670px;}
 
-.right-info{
+.right-info,.explore-right{
 	float: right;width: 320px;margin-bottom: 50px;}
 
 .user-background{
@@ -143,7 +140,7 @@ body > #wrap {
 
 .main-card{
 	background: #FFFFFF;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	width: 670px;
 	height: 200px;
 }
@@ -496,3 +493,40 @@ body > #wrap {
 	background:rgb(245,248,240);cursor: pointer;}
 
 /***********************setting*************************/
+
+/***********************explore*************************/
+
+.refresh-column{
+	width: 100%;
+	height: 30px;
+	background:rgb(245,248,240);
+	text-align: center;
+	padding-top: 5px;
+	margin-bottom: 10px;
+}
+
+/************************left*******************/
+
+.refresh-column:hover{
+	background:rgb(217,237,247);cursor: pointer; }
+
+/************************left*******************/
+
+/************************right*******************/
+
+.explore-right-hot-topic{
+	background: #FFFFFF;
+	padding: 15px;
+	margin-bottom: 10px;
+}
+
+.more-topic{
+	float: right;font-weight: normal;}
+
+.more-topic a{
+	text-decoration: none;color: rgb(153,153,153);}
+
+
+/************************right*******************/
+
+/***********************explore*************************/
