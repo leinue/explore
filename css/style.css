@@ -464,4 +464,35 @@ body > #wrap {
 
 /************setting-notification***********/
 
+.setting-card-user-mid{
+	float: left;
+	width: 160px;
+	background:#FFFFFF;
+	margin-left: 20px;
+	border-top: 6px solid rgb(118,167,250);
+	padding: 15px;
+}
+
+.lib-card-heading a{
+	text-decoration: none;color:#000000;}
+
+.lib-card-heading a:hover{color:rgb(102,102,102);}
+
+.setting-card-user-welcome-content ul{
+	list-style: none;margin-left: -40px;}
+
+.setting-card-user-welcome-content li{
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid rgb(238,238,238);
+	color: rgb(102,102,102);
+}
+
+.setting-card-user-welcome-content a{
+	text-decoration: none;color: rgb(102,102,102);}
+
+.setting-card-user-welcome-content li:hover{
+	background:rgb(245,248,240);cursor: pointer;}
+
 /***********************setting*************************/
