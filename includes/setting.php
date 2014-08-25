@@ -4,13 +4,14 @@
 
 		<div class="setting-user-card">
 			<div class="setting-change-ptoto">
+				<div class="lib-card-heading">图片</div>
 				<div class="setting-face">
 					<span class="setting-face-background-title">头像</span>					
 					<img src="user/ivydom/photo.jpg" alt="ivydom" width="70" height="70" class="img-rounded">
   					<div class="btn-group">
     					<button type="button" class="btn btn-default">更换头像</button>
   					</div>
-  					<span class="setting-help-block">作为您的个人象征</span>
+  					<span class="setting-help-block">您的个人象征</span>
 				</div>
 				<div class="setting-background">
 					<span class="setting-face-background-title">背景</span>					
@@ -18,7 +19,7 @@
   					<div class="btn-group">
     					<button type="button" class="btn btn-default">更换背景</button>
   					</div>
-  					<span class="setting-help-block">支持.jpg|.png|.bmp</span>		
+  					<span class="setting-help-block">.jpg|.png|.bmp</span>		
 				</div>
 			</div>
 		</div>
@@ -30,6 +31,27 @@
 					<input type="text" class="form-control" placeholder="请输入新邮箱">
     			</div>
     			<div class="setting-card-footer-email">
+    				<button type="button" class="btn btn-info">保存更改</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="setting-user-card">
+			<div class="setting-password">
+				<div class="lib-card-heading">更改密码</div>
+				<div class="input-group">
+					<input type="password" class="form-control" placeholder="请输入原密码">
+    			</div>
+    			<span class="help-block"></span>
+    			<div class="input-group">
+					<input type="password" class="form-control" placeholder="请输入新密码">
+    			</div>
+    			<span class="help-block"></span>
+    			<div class="input-group">
+					<input type="password" class="form-control" placeholder="请确认新密码">
+    			</div>
+    			<span class="help-block">更改密码后需要重新登录</span>
+				<div class="setting-card-footer-password">
     				<button type="button" class="btn btn-info">保存更改</button>
 				</div>
 			</div>

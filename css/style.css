@@ -303,9 +303,7 @@ body > #wrap {
 }
 
 .lib-card-heading{
-	font-weight: bold;
-	border-bottom: 1px solid rgb(218,218,218);
-}
+	border-bottom: 1px solid rgb(218,218,218);font-weight: bold;}
 
 .lib-card-heading-right{float: right;}
 
@@ -340,9 +338,7 @@ body > #wrap {
 }
 
 .people-lib-twitter-detail-name a{
-	text-decoration: none;
-	color: #000000;
-}
+	text-decoration: none;color: #000000;}
 
 .lib-twitter-detail-name-right{
 	float: right;
@@ -380,7 +376,8 @@ body > #wrap {
 .people-lib-send-msg-menu li:hover{
 	color: rgb(100,100,100);cursor: pointer;}
 
-.people-lib-send-msg-menu li{float:left;margin-right: 35px;}
+.people-lib-send-msg-menu li{
+	float:left;margin-right: 35px;}
 
 .people-lib-send-msg-button{float: right;margin-top: -25px;}
 
@@ -419,10 +416,12 @@ body > #wrap {
 	border-top: 6px solid rgb(118,167,250);
 }
 
-.setting-face,.setting-background,.setting-profile,.setting-email
+.setting-face,.setting-background,.setting-profile,.setting-email,.setting-password
 	{padding: 15px;}
 
 .setting-face-background-title{margin-right: 5px;}
+
+.setting-change-ptoto{padding:15px;}
 
 .setting-change-ptoto img{margin-right: 20px;}
 
@@ -443,10 +442,16 @@ body > #wrap {
 /**************setting-email****************/
 
 .setting-card-footer-email{
-	margin-top: -35px;
-	float: right;
-}
+	margin-top: -35px;float: right;}
 
 /**************setting-email****************/
+
+/*************setting-password**************/
+
+.setting-card-footer-password{
+	margin-top: -45px;float: right;
+}
+
+/*************setting-password**************/
 
 /***********************setting*************************/
