@@ -535,3 +535,68 @@ body > #wrap {
 /************************right*******************/
 
 /***********************explore*************************/
+
+/**********************hot-area*************************/
+
+.hotarea-card{
+	margin: 0 auto;
+	width: 740px;
+	margin-top:60px;
+}
+
+.hotarea-left{margin-right: 20px;}
+
+.hotarea-right,.hotarea-left{
+	float: left;
+	width: 360px;
+	background: #FFFFFF;
+	padding: 15px;
+	margin-bottom: 20px;
+}
+
+/*****************hotarea-card-main**************/
+
+.hotarea-card-main-heading{height: 50px;}
+
+.hotarea-card-main-heading-editor li{color: rgb(153,153,153);}
+
+.hotarea-card-main-heading-editor ul li a{
+	text-decoration: none;color: rgb(153,153,153);}
+
+.hotarea-card-main-heading-editor ul li a:hover{
+	cursor: pointer;text-decoration: underline;}
+
+.hotarea-card-main-heading-editor ul a{
+	text-decoration: none;color: #000000;}
+
+.hotarea-card-main-heading-editor ul a:hover{text-decoration: underline;}
+
+.hotarea-card-main-heading-editor ul{
+	margin-left: 20px;
+	margin-top: -42px;
+	list-style: none;
+}
+
+.hotarea-card-text{
+	margin-top: 15px;margin-bottom: 15px;}
+
+.hotarea-card-img a img:hover{
+	-webkit-box-shadow: #666 0px 0px 5px;
+	-moz-box-shadow: #666 0px 0px 5px;
+	box-shadow: #666 0px 0px 5px;
+}
+
+.hotarea-card-main-footer{
+	margin-top: 15px;
+	background: rgb(245,245,245);
+	margin-left: -15px;
+	width: 360px;
+	margin-bottom: -18px;
+	padding: 15px;
+}
+
+.hotarea-comment{margin-top: 15px;margin-bottom: 29px;}
+
+/*****************hotarea-card-main**************/
+
+/**********************hot-area*************************/
