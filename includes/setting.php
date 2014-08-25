@@ -24,7 +24,15 @@
 		</div>
 
 		<div class="setting-user-card">
-		fdfdgfffd
+			<div class="setting-email">
+				<div class="lib-card-heading">目前邮箱:23333@qq.com</div>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="请输入新邮箱">
+    			</div>
+    			<div class="setting-card-footer-email">
+    				<button type="button" class="btn btn-info">保存更改</button>
+				</div>
+			</div>
 		</div>
 
 	</div>

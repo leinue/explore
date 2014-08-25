@@ -419,7 +419,7 @@ body > #wrap {
 	border-top: 6px solid rgb(118,167,250);
 }
 
-.setting-face,.setting-background,.setting-profile
+.setting-face,.setting-background,.setting-profile,.setting-email
 	{padding: 15px;}
 
 .setting-face-background-title{margin-right: 5px;}
@@ -436,10 +436,17 @@ body > #wrap {
 
 .lib-card-heading{margin-bottom: 10px;}
 
-.setting-card-footer{
-	margin-top: 10px;
-}
+.setting-card-footer{margin-top: 10px;}
 
 /*************setting-profile***************/
+
+/**************setting-email****************/
+
+.setting-card-footer-email{
+	margin-top: -35px;
+	float: right;
+}
+
+/**************setting-email****************/
 
 /***********************setting*************************/
