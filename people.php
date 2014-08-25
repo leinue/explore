@@ -51,8 +51,8 @@ require("includes/header.php");
 			<div class="people-lib-send-msg">
 				<ul class="people-lib-send-msg-menu">
 					<li title="图片"><span class="glyphicon glyphicon-picture"></span></li>
-					<li title="#话题"><span class="glyphicon glyphicon-comment"></span></li>
-					<li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li>
+					<li title="#话题"><span class="glyphicon glyphicon-comment" onclick="addTopic()"></span></li>
+					<li title="@某人"><span class="glyphicon glyphicon-volume-up" onclick="atSomeone()"></span></li>
 					<li title="链接(支持音乐/视频)"><span class="glyphicon glyphicon-link"></span></li>
 				</ul>
 				<div class="people-lib-send-msg-button"><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
@@ -194,4 +194,14 @@ require("includes/header.php");
 		document.getElementById('id-comment-input-enabled').style.visibility='hidden';
 		document.getElementById('id-comment-input-enabled').style.display='none';
 	}
+
+	function addContent(idName,contentAdded){
+		var doc=document.getElementById(idName);
+		var originalText=doc.innerHTML;
+		doc.innerHTML=originalText+contentAdded;	
+	}
+
+	function addTopic(){addContent('twitter-content','##');}
+
+	function atSomeone(){addContent('twitter-content','@');}
 </script>
