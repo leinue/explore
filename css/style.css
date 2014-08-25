@@ -161,7 +161,10 @@ body > #wrap {
 .full-name a{color: #000000;}
 
 .user-blog-text{
-	overflow: hidden;height: 115px;}
+	overflow: hidden;height: 115px;width: 480px;}
+
+.user-blog-text-plus-img{
+	float: right;margin-top: -110px;}
 
 .at-account{color: rgb(96,96,96);font-size: 14px;}
 
@@ -181,7 +184,7 @@ body > #wrap {
 }
 
 .right-hot-info{
-	margin-top: 10px;background: #FFFFFF;height: 200px;}
+	margin-top: 10px;background: #FFFFFF;}
 
 .hot-info-heading{
 	border-bottom: 1px solid rgb(191,224,236);
@@ -192,10 +195,12 @@ body > #wrap {
 .hot-info-heading span{
 	font-size: 20px;margin-left: 10px;}
 
-.hot-info-text ul{list-style: none;}
-
-.hot-info-text ul{
-	padding-left: 10px;padding-top: 10px;}
+.right-hot-info ul{
+	padding-left: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-right: 10px;
+}
 
 .notification-menu-first{border-bottom: 1px solid rgb(225,232,237);}
 

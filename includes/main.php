@@ -55,6 +55,9 @@
 				<div class="user-blog-text">
 					<span>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br></span>
 				</div>
+				<div class="user-blog-text-plus-img">
+					<img src="user/ivydom/background.jpg" alt="ivydom" width="80" height="80">
+				</div>
 			</div>
 
 			<div class="main-card-footer">
@@ -108,11 +111,13 @@
 			<div class="hot-info-heading">
 				<span>热门地方</span>
 			</div>
-			<div class="hot-info-text">
+			<div class="setting-card-user-welcome-content">
 				<ul>
-					<li><a href="">1111</a></li>
-					<li><a href="">11111</a></li>
-					<li><a href="">111111</li>
+			 		<a href=""><li><span class="glyphicon glyphicon-user"></span> 江泽民</li></a>
+			 		<a href=""><li><span class="glyphicon glyphicon-user"></span> 温家宝</li></a>
+			 		<a href=""><li><span class="glyphicon glyphicon-user"></span> 糊紧掏</li></a>
+					<a href=""><li><span class="glyphicon glyphicon-user"></span> 习近平</li></a>
+					<a href=""><li><span class="glyphicon glyphicon-user"></span> 李克强</li></a>
 				</ul>
 			</div>
 		</div>

@@ -14,7 +14,10 @@
 				</div>
 
 				<div class="user-blog-text">
-					<span>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br></span>
+					<span>实际上，这是我们一生中不得不面对的问题之一，无论亟待解决放任不管，它都客观地存在而无法被避免。做可以划归为“解决有必要”性质类别的问题，为什么人们长时间不联系会导致关系疏远？我是一个自幼接受汉语文化教育的辽宁蒙古族。我个人的观点是内外蒙古各部落本来是统一的整体，具备自成体系基本相近的语言文化和风俗习惯甚至军政合一的组织系统。</span>
+				</div>
+				<div class="user-blog-text-plus-img">
+					<img src="user/ivydom/background.jpg" alt="ivydom" width="80" height="80">
 				</div>
 			</div>
 
