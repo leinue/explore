@@ -7,10 +7,7 @@ body{background: rgb(192,222,237);}
 #head-menu-right{float: right;}
 
 .front-welcome{
-	width: 850px;
-	margin:0 auto;
-	margin-top: 55px;
-}
+	width: 850px;margin:0 auto;margin-top: 55px;}
 
 .hero-title{
 	float: left;
@@ -21,10 +18,7 @@ body{background: rgb(192,222,237);}
 }
 
 .hero-join{
-	float: left;
-	width: 300px;
-	margin-top: 30px;
-}
+	float: left;width: 300px;margin-top: 30px;}
 
 .hero-site{
 	font-weight: 100;
@@ -70,29 +64,18 @@ body > #wrap {
 }
 
 .foot ul{
-	text-align: center;
-	list-style: none;
+	text-align: center;list-style: none;
 	padding-top: 20px;
 }
 
 .user-card{
-	width: 1000px;
-	margin:0 auto;
-	margin-top: 60px;
-}
+	width: 1000px;margin:0 auto;margin-top: 60px;}
 
 .left-info{
-	float: left;
-	width: 670px;
-	height: 300px;
-	
-}
+	float: left;width: 670px;height: 300px;}
 
 .right-info{
-	float: right;
-	width: 320px;
-	margin-bottom: 50px;
-}
+	float: right;width: 320px;margin-bottom: 50px;}
 
 .user-background{
 	height: 95px;
@@ -173,10 +156,7 @@ body > #wrap {
 }
 
 .main-card-detail-info{
-	float: left;
-	height: 150px;
-	width: 570px;
-}
+	float: left;height: 150px;width: 570px;}
 
 .full-name{
 	margin-top: 15px;font-size: 18px;}
@@ -204,10 +184,7 @@ body > #wrap {
 }
 
 .right-hot-info{
-	margin-top: 10px;
-	background: #FFFFFF;
-	height: 200px;
-}
+	margin-top: 10px;background: #FFFFFF;height: 200px;}
 
 .hot-info-heading{
 	border-bottom: 1px solid rgb(191,224,236);
@@ -256,8 +233,7 @@ body > #wrap {
 }
 
 .people-user-heading{
-	width: 740px;
-	height: 265px;
+	width: 740px;height: 265px;
 	border-bottom: 1px solid rgb(225,232,237);
 }
 
@@ -271,10 +247,7 @@ body > #wrap {
 }
 
 .people-user-heading-right{
-	float: left;
-	width: 480px;
-	height: 100%;
-}
+	float: left;width: 480px;height: 100%;}
 
 .people-user-heading-left-detail{
 	margin: 0 auto;
@@ -289,9 +262,7 @@ body > #wrap {
 	font-size: 20px;padding-top: 20px;}
 
 .people-user-description,.people-user-accessed-record{
-	padding-top: 20px;
-	text-align: center;
-}
+	padding-top: 20px;text-align: center;}
 
 .user-nav-pills{
 	text-decoration: none;
@@ -302,14 +273,10 @@ body > #wrap {
 }
 
 .user-nav-pills li{
-	color: #737373;
-	float: left;
-	margin-right: 20px;
-}
+	color: #737373;float: left;margin-right: 20px;}
 
 .user-nav-pills li:hover{
-	border-bottom: 2px solid rgb(118,167,250);
-}
+	border-bottom: 2px solid rgb(118,167,250);}
 
 .people-user-footer a{text-decoration: none;color:#737373;}
 
@@ -438,7 +405,10 @@ body > #wrap {
 
 .user-setting-left{margin-right: 20px;}
 
-.user-setting-right,.user-setting-left{float: left;}
+.user-setting-right,.user-setting-left{
+	float: left;width: 400px; }
+
+/**************setting-photo****************/
 
 .setting-user-card{
 	float: left;
@@ -449,11 +419,27 @@ body > #wrap {
 	border-top: 6px solid rgb(118,167,250);
 }
 
-.setting-face,.setting-background{padding: 15px;}
+.setting-face,.setting-background,.setting-profile
+	{padding: 15px;}
 
 .setting-face-background-title{margin-right: 5px;}
 
 .setting-change-ptoto img{margin-right: 20px;}
 
 .setting-help-block{margin-left: 20px;}
+
+/**************setting-photo****************/
+
+/*************setting-profile***************/
+
+.setting-profile{margin: 0 auto;}
+
+.lib-card-heading{margin-bottom: 10px;}
+
+.setting-card-footer{
+	margin-top: 10px;
+}
+
+/*************setting-profile***************/
+
 /***********************setting*************************/
