@@ -6,7 +6,7 @@
 */
 class mysqlManager{
 	
-	static private $pdo=NULL;
+	static $pdo=NULL;
 
 	private function __construct(){}
 	private function __clone(){}
@@ -41,6 +41,7 @@ class mysqlManager{
     `detailIntro` text(160) not null,
     `face` text not null,
     `background` text not null,
+    `backgroundBlur` text not null,
     `emailVerified` int(2) not null,
     `place` text,
     `nowPlace` text,
@@ -63,7 +64,7 @@ class mysqlManager{
 	
 		foreach ($sql as $key => $value) {
 			try {
-			$this->pdo->query($sql[$key]);
+			self::$pdo->query($sql[$key]);
 			} catch (PDOException $e) {
 			echo $e->getMessage();
 			}
