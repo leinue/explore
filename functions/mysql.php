@@ -1,9 +1,5 @@
 <?php
 
-/*
-* creat table
-	@iniTable($sql) 初始化数据库表格
-*/
 class mysqlManager{
 	
 	static $pdo=NULL;
@@ -73,7 +69,6 @@ class mysqlManager{
 	}
 
 }
-
 
 
 ?>
