@@ -6,11 +6,22 @@
 */
 class mysqlManager{
 	
-	var $pdo;
+	static private $pdo=NULL;
 
-	function __construct($dbname,$host,$name,$password){
+	private function __construct(){}
+	private function __clone(){}
+
+	static function getPDO(){
+		if(self::$pdo==NULL){
+			self::$pdo=new mysqlManager();
+		}
+
+		return self::$pdo;
+	}
+
+	function connectMysql($dbname,$host,$name,$password){
 		try {
-			$this->pdo=new PDO("mysql:dbname=$dbname;host=$host",$name,$password);
+			self::$pdo=new PDO("mysql:dbname=$dbname;host=$host",$name,$password);
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
@@ -56,13 +67,12 @@ class mysqlManager{
 			} catch (PDOException $e) {
 			echo $e->getMessage();
 			}
-	}
+		}
 		
 	}
 
 }
 
-$cm=new mysqlManager('explore','localhost','root','xieyang');
-$cm->iniTable();
+
 
 ?>
