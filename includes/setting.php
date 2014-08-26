@@ -79,6 +79,10 @@
 					<input type="text" class="form-control" placeholder="一句话名片">
     			</div>
     			<span class="help-block">比如,专注拾荒三十年,限15个字</span>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="目前在什么地方">
+    			</div>
+    			<span class="help-block">比如"火星"</span>
 				<textarea class="form-control" id="twitter-content" rows="2" onkeyup="alterBtnStatus()" required></textarea>
     			<span class="help-block">你去过多少地方?用英文逗号分割.</span>
 				<textarea class="form-control" id="twitter-content" rows="2" onkeyup="alterBtnStatus()" required></textarea>
