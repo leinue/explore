@@ -105,10 +105,32 @@ class accessExplore extends mysqlManager{
 			return false;}
 	}
 
+	function refreshUser(){
+		
+	}
+
 	function logout(user $_user){
 		unset($user);
 		session_destroy();
 		session_write_close();
+	}
+
+	function loadDynamic($uid){
+
+		$sql_dynamic="SELECT * FROM `dynamic` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql_dynamic);
+
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'dynamic');
+
+		if ($res) {
+			if($_dynamic=$stmt->fetch()) {
+				return $_dynamic;
+			}else{
+				return false;}
+		}else{
+			return false;}		
 	}
 
 }
@@ -118,30 +140,30 @@ class accessExplore extends mysqlManager{
 */
 class user{
 
-	protected $name;
-	protected $email;
-	protected $uid;
-	protected $location;
-	protected $sex;
-	protected $occupation;
-	protected $intro;
-	protected $detailIntro;
-	protected $face;
-	protected $background;
-	protected $backgroundBlur;
-	protected $emailVerified;
-	protected $place;
-	protected $nowPlace;
-	protected $sharingNum;
-	protected $ip;
-	protected $regTime;
-	protected $lastLoginTime;
+	private $name;
+	private $email;
+	private $uid;
+	private $location;
+	private $sex;
+	private $occupation;
+	private $intro;
+	private $detailIntro;
+	private $face;
+	private $background;
+	private $backgroundBlur;
+	private $emailVerified;
+	private $place;
+	private $nowPlace;
+	private $sharingNum;
+	private $ip;
+	private $regTime;
+	private $lastLoginTime;
 
 	function getName(){return $this->name;}
 
 	function getEmail(){return $this->email;}
 
-	function getuid(){return $this->uid;}
+	function getUid(){return $this->uid;}
 
 	function getLocation(){return $this->location;}
 
@@ -172,6 +194,26 @@ class user{
 	function getLastLogin(){return $this->lastLoginTime;}
 }
 
+
+/**
+* dynamic
+*/
+class dynamic{
+	
+	private $dynamicID;
+	private $uid;
+	private $dynamic;
+	private $time;
+
+	function getDynamicID(){return $this->dynamicID;}
+
+	function getUid(){return $this->uid;}
+
+	function getDynamic(){return $this->dynamic;}
+
+	function getTime(){return $this->time;}
+}
+
 $dbname="explore";
 $host="localhost";
 $dbVerifyName="root";
@@ -185,8 +227,10 @@ try {
 
 $accEx=new accessExplore($pdo);
 
-$accEx->regExplore('59705591@qq.com','ivy','7758521x');
-//$user_=$accEx->loginIn('597055914@qq.com','7758521x');
+//$accEx->regExplore('59705591@qq.com','ivy','7758521x');
+$user_=$accEx->loginIn('597055914@qq.com','7758521x');
+$dynamic_=$accEx->loadDynamic($user_->getUid());
+echo $dynamic_->getDynamic();
 //session_start();
 //echo $user_->getName();
 ?>
