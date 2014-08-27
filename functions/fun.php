@@ -106,7 +106,20 @@ class accessExplore extends mysqlManager{
 	}
 
 	function refreshUser(){
-		
+		$sql_login="SELECT * FROM `basicprofile`";
+		$stmt=$this->pdo->prepare($sql_login);
+
+		$res=$stmt->execute(array($email,$password));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'user');
+
+		if ($res) {
+			if($_user=$stmt->fetch()) {
+				return $_user;
+			}else{
+				return false;}
+		}else{
+			return false;}		
 	}
 
 	function logout(user $_user){
@@ -228,9 +241,9 @@ try {
 $accEx=new accessExplore($pdo);
 
 //$accEx->regExplore('59705591@qq.com','ivy','7758521x');
-$user_=$accEx->loginIn('597055914@qq.com','7758521x');
-$dynamic_=$accEx->loadDynamic($user_->getUid());
-echo $dynamic_->getDynamic();
+$user_=$accEx->loginIn('597055914@qq.com','775521x');
+//$dynamic_=$accEx->loadDynamic($user_->getUid());
+//echo $dynamic_->getDynamic();
 //session_start();
 //echo $user_->getName();
 ?>
