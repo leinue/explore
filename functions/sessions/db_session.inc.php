@@ -17,7 +17,7 @@ function close_session(){
 function read_session($sid){
 	global $sdbc;
 
-	$sql=sprintf("SELECT `data` FROM `sessions` WHERE `id`='%s'",mysqli_real_escape_string($sdbc,$sid));
+	$sql=sprintf("SELECT `data` FROM `sessions` WHERE `sessions_id`='%s'",mysqli_real_escape_string($sdbc,$sid));
 	$result=mysqli_query($sdbc,$sql);
 
 	echo mysqli_error($sdbc);
@@ -38,7 +38,7 @@ function read_session($sid){
 function write_session($sid,$data){
 	global $sdbc;
 
-	$sql=sprintf("REPLACE INTO `sessions` (`id`,`data`) VALUES('%s','%s')",
+	$sql=sprintf("REPLACE INTO `sessions` (`sessions_id`,`data`) VALUES('%s','%s')",
 		mysqli_real_escape_string($sdbc,$sid),mysqli_real_escape_string($sdbc,$data));
 	$result=mysqli_query($sdbc,$sql);
 
@@ -50,7 +50,7 @@ function write_session($sid,$data){
 function destory_session($sid){
 	global $sdbc;
 
-	$sql=sprintf("DELETE FROM `session` WHERE `id`='%s'",
+	$sql=sprintf("DELETE FROM `session` WHERE `sessions_id`='%s'",
 		mysqli_real_escape_string($sdbc,$sid));
 	$result=mysqli_query($sdbc,$sql);
 
@@ -74,5 +74,4 @@ function clean_session($expire){
 
 session_set_save_handler('open_session', 'close_session', 'read_session', 'write_session', 'destory_session', 'clean_session');
 
-session_start();
 ?>

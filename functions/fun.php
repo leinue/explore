@@ -1,6 +1,6 @@
 <?php
 require('mysql.php');
-require('sessions/sessions.php');
+require('sessions/db_session.inc.php');
 
 function getIP(){
 	global $ip;
@@ -16,7 +16,6 @@ function getIP(){
 
 class accessExplore extends mysqlManager{
 
-	public $regResult;
 	public $pdo;
 
 	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
@@ -31,8 +30,8 @@ class accessExplore extends mysqlManager{
 		$nowTime=date('Y-m-d H:i:s',time());
 		$userIp=getIP();
 
-		$sql="INSERT INTO `basicprofile`(`email`, `name`, `password`, `location`, `sex`, `intro`, `detailIntro`, `face`, `background`,`backgroundBlur`, `emailVerified`, `place`, `nowPlace`, `ip`, `regTime`, `lastLoginTime`) 
-		VALUES (?,?,SHA1(?),'China','futa','explore','explore',?,?,?,0,'China','China',?,?,?)";
+		$sql="INSERT INTO `basicprofile`(`email`, `name`, `password`, `location`, `sex`, `intro`, `detailIntro`, `face`, `background`,`backgroundBlur`, `emailVerified`, `place`, `nowPlace`,`sharingNum`, `ip`, `regTime`, `lastLoginTime`) 
+		VALUES (?,?,SHA1(?),'China','futa','explore','explore',?,?,?,0,'China','China',0,?,?,?)";
 
 		$stmt=$this->pdo->prepare($sql);
 
@@ -45,21 +44,100 @@ class accessExplore extends mysqlManager{
 				$rowAffectedNum=$this->pdo->exec($sql_dynamic);
 
 				if ($rowAffectedNum!=0) {
-					$this->regResult=true;
-				}else{$this->regResult=false;}
+					return true;
+				}else{return false;}
 
 			}else{
 				print_r($stmt->errorInfo());
-				$this->regResult=false;
+				return false;
 			}
 
-		}else{$this->regResult=false;}
+		}else{return false;}
 	}
 
-	function loginIn($email,$password){
+	function loginIn($email,$password){//返回user类
 
+		$sql_login="SELECT * FROM `basicprofile` WHERE `email`=? and `password`=SHA1(?)";
+		$stmt=$this->pdo->prepare($sql_login);
+
+		$res=$stmt->execute(array($email,$password));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'user');
+
+		if ($res) {
+			if($_user=$stmt->fetch()) {
+				return $_user;
+			}else{
+				return false;}
+		}else{
+			return false;}
 	}
 
+	function logout(user $_user){
+		unset($user);
+		session_destroy();
+		session_write_close();
+	}
+
+}
+
+/**
+* user
+*/
+class user{
+
+	protected $name;
+	protected $email;
+	protected $uid;
+	protected $location;
+	protected $sex;
+	protected $occupation;
+	protected $intro;
+	protected $detailIntro;
+	protected $face;
+	protected $background;
+	protected $backgroundBlur;
+	protected $emailVerified;
+	protected $place;
+	protected $nowPlace;
+	protected $sharingNum;
+	protected $ip;
+	protected $regTime;
+	protected $lastLoginTime;
+
+	function getName(){return $this->name;}
+
+	function getEmail(){return $this->email;}
+
+	function getuid(){return $this->uid;}
+
+	function getLocation(){return $this->location;}
+
+	function getSex(){return $this->sex;}
+
+	function getOccupation(){return $this->occupation;}
+
+	function getIntro(){return $this->intro;}
+
+	function getDetailIntro(){return $this->detailIntro;}
+
+	function getFace(){return $this->face;}
+
+	function getBackground(){return $this->background;}
+
+	function getBackgroundBlur(){return $this->backgroundBlur;}
+
+	function getEmailVerified(){return $this->emailVerified;}
+
+	function getPlace(){return $this->place;}
+
+	function getNowPlace(){return $this->nowPlace;}
+
+	function getIP(){return $this->ip;}
+
+	function getRegTime(){return $this->regTime;}
+
+	function getLastLogin(){return $this->lastLoginTime;}
 }
 
 $dbname="explore";
@@ -74,6 +152,9 @@ try {
 }
 
 $accEx=new accessExplore($pdo);
-$accEx->regExplore('597055914@qq.com','ivy','7758521x');
 
+//$accEx->regExplore('597055914@qq.com','ivy','7758521x');
+$user_=$accEx->loginIn('597055914@qq.com','7758521x');
+//session_start();
+echo $user_->getName();
 ?>

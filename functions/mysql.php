@@ -24,6 +24,7 @@ class mysqlManager{
     `emailVerified` int(2) not null,
     `place` text,
     `nowPlace` text,
+    `sharingNum` int not null,
     `ip` text not null,
     `regTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `lastLoginTime` TIMESTAMP not null,
