@@ -22,37 +22,69 @@ class accessExplore extends mysqlManager{
 
 	function regExplore($email,$name,$password){
 
-		date_default_timezone_set("Etc/GMT+8");
+		if(!($this->emailIsExist($email))){
 
-		$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); //禁用prepared statements的仿真效果
+			if(!($this->nameIsExist($name))){
+				date_default_timezone_set("Etc/GMT+8");
 
-		$userFolder="user/default/";
-		$nowTime=date('Y-m-d H:i:s',time());
-		$userIp=getIP();
+				$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); //禁用prepared statements的仿真效果
 
-		$sql="INSERT INTO `basicprofile`(`email`, `name`, `password`, `location`, `sex`, `intro`, `detailIntro`, `face`, `background`,`backgroundBlur`, `emailVerified`, `place`, `nowPlace`,`sharingNum`, `ip`, `regTime`, `lastLoginTime`) 
-		VALUES (?,?,SHA1(?),'China','futa','explore','explore',?,?,?,0,'China','China',0,?,?,?)";
+				$userFolder="user/default/";
+				$nowTime=date('Y-m-d H:i:s',time());
+				$userIp=getIP();
 
+				$sql="INSERT INTO `basicprofile`(`email`, `name`, `password`, `location`, `sex`, `intro`, `detailIntro`, `face`, `background`,`backgroundBlur`, `emailVerified`, `place`, `nowPlace`,`sharingNum`, `ip`, `regTime`, `lastLoginTime`) 
+				VALUES (?,?,SHA1(?),'China','futa','explore','explore',?,?,?,0,'China','China',0,?,?,?)";
+
+				$stmt=$this->pdo->prepare($sql);
+
+				if($stmt!=false){
+
+					$exeres=$stmt->execute(array($email, $name,$password,$userFolder."photo.jpg",$userFolder."background.jpg",$userFolder."backgroundBlur.jpg",$userIp,$nowTime,$nowTime)); 
+
+					if($exeres){
+						$sql_dynamic="INSERT INTO `dynamic`(`uid`, `dynamic`) VALUES (".$this->pdo->lastInsertId().",'注册了Explore')";
+						$rowAffectedNum=$this->pdo->exec($sql_dynamic);
+
+						if ($rowAffectedNum!=0) {
+							return true;
+						}else{return false;}
+
+					}else{
+						print_r($stmt->errorInfo());
+						return false;
+					}
+
+				}else{return false;}
+			}else{
+				echo '名字重复';
+			}
+		}else{echo '邮箱重复';}
+	}
+
+	function emailIsExist($email){return $this->isExist(1,$email);}
+
+	function nameIsExist($name){return $this->isExist(2,$name);}
+
+	function isExist($method,$info){
+		//$method=1 email;$method=2 name
+		switch ($method) {
+			case 1:
+				$sql="SELECT * FROM `basicprofile` WHERE `email`=?";
+				break;
+			case 2:
+				$sql="SELECT * FROM `basicprofile` WHERE `name`=?";
+			    break;
+		}
+		
 		$stmt=$this->pdo->prepare($sql);
 
 		if($stmt!=false){
-
-			$exeres=$stmt->execute(array($email, $name,$password,$userFolder."photo.jpg",$userFolder."background.jpg",$userFolder."backgroundBlur.jpg",$userIp,$nowTime,$nowTime)); 
-
-			if($exeres){
-				$sql_dynamic="INSERT INTO `dynamic`(`uid`, `dynamic`) VALUES (".$this->pdo->lastInsertId().",'注册了Explore')";
-				$rowAffectedNum=$this->pdo->exec($sql_dynamic);
-
-				if ($rowAffectedNum!=0) {
-					return true;
-				}else{return false;}
-
-			}else{
-				print_r($stmt->errorInfo());
-				return false;
+			if($stmt->execute(array($info))){
+				$row=$stmt->fetch();
+				return $row;
 			}
-
-		}else{return false;}
+		}
 	}
 
 	function loginIn($email,$password){//返回user类
@@ -153,8 +185,8 @@ try {
 
 $accEx=new accessExplore($pdo);
 
-//$accEx->regExplore('597055914@qq.com','ivy','7758521x');
-$user_=$accEx->loginIn('597055914@qq.com','7758521x');
+$accEx->regExplore('59705591@qq.com','ivy','7758521x');
+//$user_=$accEx->loginIn('597055914@qq.com','7758521x');
 //session_start();
-echo $user_->getName();
+//echo $user_->getName();
 ?>
