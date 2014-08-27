@@ -227,6 +227,193 @@ class dynamic{
 	function getTime(){return $this->time;}
 }
 
+/**
+* notification
+*/
+class notification{
+
+	private $notificationID;
+	private $uid;
+	private $content;
+	private $notiType;//notifcation or mension
+	private $notiTime;
+	
+	function getNotificationID(){return $this->notificationID;}
+
+	function getUid(){return $this->uid;}
+
+	function getContent(){return $this->content;}
+
+	function getNotiType(){return $this->notiType;}
+
+	function getNotiTime(){return $this->notiTime;}
+}
+
+/**
+* draft
+*/
+class draft{
+
+	private $draftID;
+	private $uid;
+	private $content;
+	private $editTime;
+	
+	function getDraftID(){return $this->draftID;}
+
+	function getUid(){return $this->uid;}
+
+	function getContent(){return $this->content;}
+
+	function getEditTime(){return $this->editTime;}
+}
+
+/**
+* collection
+*/
+class collection{
+	
+	private $collectionID;
+	private $uid;
+	private $collectTime;
+	private $sharingID;
+
+	function getCollectionID(){return $this->collectionID;}
+
+	function getUid(){return $this->uid;}
+
+	function getCollectTime(){return $this->collectTime;}
+
+	function getSharingID(){return $this->sharingID;}
+}
+
+class sharing{
+
+	private $sharingID;
+	private $uid;
+	private $time;
+	private $sharingType;
+	private $content;
+	private $img;
+	private $commentAmount;
+	private $likeAmount;
+	private $dislikeAmount;
+	private $tipOff;
+	
+	function getSharingID(){return $this->sharingID;}
+
+	function getUid(){return $this->uid;}
+
+	function getTime(){return $this->time;}
+
+	function getSharingType(){return $this->sharingType;}
+
+	function getContent(){return $this->content;}
+
+	function getImg(){return $this->img;}
+
+	function getCommentAmount(){return $this->commentAmount;}
+
+	function getLikeAmount(){return $this->likeAmount;}
+
+	function getDislikeAmount(){return $this->dislikeAmount;}
+
+	function getTipOff(){return $this->tipOff;}
+
+	function getTipOff(){return $this->tipOff;}
+
+}
+
+class comment{
+
+	private $commentID;
+	private $uid;
+	private $sharingID;
+	private $content;
+	private $tiem;
+	
+	function getCommentID(){return $this->commentID;}
+
+	function getUid(){return $this->uid;}
+
+	function getSharingID(){return $this->sharingID;}
+
+	function getContent(){return $this->content;}
+
+	function getTiem(){return $this->tiem;}
+
+	function getTiem(){return $this->tiem;}
+
+}
+
+class like{
+
+	private $likeID;
+	private $sharingID;
+	private $time;
+	
+	function getLikeID(){return $this->likeID;}
+
+	function getSharingID(){return $this->sharingID;}
+
+	function getTime(){return $this->time;}
+
+	function getTime(){return $this->time;}
+
+}
+
+class dislike{
+
+	private $dislikeID;
+	private $sharingID;
+	private $time;
+	
+	function getDislikeID(){return $this->dislikeID;}
+
+	function getSharingID(){return $this->sharingID;}
+
+	function getTime(){return $this->time;}
+
+	function getTime(){return $this->time;}
+
+}
+
+class noAttentionTo{
+
+	private $attentionID;
+	private $sharingID;
+	private $uid;
+	
+	function getAttentionID(){return $this->attentionID;}
+
+	function getSharingID(){return $this->sharingID;}
+
+	function getUid(){return $this->uid;}
+
+	function getUid(){return $this->uid;}
+
+}
+
+class follow{
+
+	private $indexID;
+	private $uid;
+	private $followID;
+	private $followTime;
+	
+	function getIndexID(){return $this->indexID;}
+
+	function getUid(){return $this->uid;}
+
+	function getFollowID(){return $this->followID;}
+
+	function getFollowTime(){return $this->followTime;}
+
+	function getFollowTime(){return $this->followTime;}
+
+}
+
+
 $dbname="explore";
 $host="localhost";
 $dbVerifyName="root";
