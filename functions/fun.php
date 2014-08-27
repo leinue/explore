@@ -1,27 +1,27 @@
 <?php
 require('mysql.php');
 
-class toolKit{
-
-	function getIP(){
-		global $ip;
-		if (getenv("HTTP_CLIENT_IP"))
-			$ip = getenv("HTTP_CLIENT_IP");
-		else if(getenv("HTTP_X_FORWARDED_FOR"))
-			$ip = getenv("HTTP_X_FORWARDED_FOR");
-		else if(getenv("REMOTE_ADDR"))
-			$ip = getenv("REMOTE_ADDR");
-		else $ip = "Unknow";
-		return $ip;
-	}
-	
+function getIP(){
+	global $ip;
+	if (getenv("HTTP_CLIENT_IP"))
+		$ip = getenv("HTTP_CLIENT_IP");
+	else if(getenv("HTTP_X_FORWARDED_FOR"))
+		$ip = getenv("HTTP_X_FORWARDED_FOR");
+	else if(getenv("REMOTE_ADDR"))
+		$ip = getenv("REMOTE_ADDR");
+	else $ip = "Unknow";
+	return $ip;
 }
 
-class regExplore extends mysqlManager{
+class accessExplore extends mysqlManager{
 
 	public $regResult;
 
 	function __construct($email,$name,$password){
+
+	}
+
+	function regExplore($email,$name,$password){
 
 		date_default_timezone_set("Etc/GMT+8");
 
@@ -48,16 +48,24 @@ class regExplore extends mysqlManager{
 				$this->regResult=false;
 			}
 		}else{$this->regResult=false;}
-		
 	}
 
 }
 
-$cm=mysqlManager::getPDO();
-$cm->connectMysql('explore','localhost','root','xieyang');
-
-//$cm::$pdo
+//$cm=new accessExplore('explore','localhost','root','xieyang');
+//$cm->connectMysql();
 
 //$re=new regExplore('597055914','ivy','77585219966');
+
+$dbname="explore";
+$host="localhost";
+$dbVerifyName="root";
+$dbVerifyPassword="xieyang";
+
+try {
+	$pdo=new PDO("mysql:dbname=$dbname;host=$host",$dbVerifyName,$dbVerifyPassword);
+} catch (PDOException $e) {
+	echo $e->getMessage();
+}
 
 ?>

@@ -1,27 +1,10 @@
 <?php
 
 class mysqlManager{
-	
-	static $pdo=NULL;
 
-	private function __construct(){}
-	private function __clone(){}
+	protected $pdo;
 
-	static function getPDO(){
-		if(self::$pdo==NULL){
-			self::$pdo=new mysqlManager();
-		}
-
-		return self::$pdo;
-	}
-
-	function connectMysql($dbname,$host,$name,$password){
-		try {
-			self::$pdo=new PDO("mysql:dbname=$dbname;host=$host",$name,$password);
-		} catch (PDOException $e) {
-			echo $e->getMessage();
-		}
-	}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function iniTable(){
 
@@ -60,9 +43,9 @@ class mysqlManager{
 	
 		foreach ($sql as $key => $value) {
 			try {
-			self::$pdo->query($sql[$key]);
+				$this->pdo->query($sql[$key]);
 			} catch (PDOException $e) {
-			echo $e->getMessage();
+				echo $e->getMessage();
 			}
 		}
 		
