@@ -38,7 +38,8 @@ class mysqlManager{
 		'noAttentionTo'=>"create table `noAttentionTo`( `attentionID` int not null auto_increment, `sharingID` int not null, `uid` int not null, primary key(`attentionID`) )default charset=utf8;",
 		'follow'=>"create table `follow`( `indexID` int not null auto_increment, `uid` int not null, `followID` int not null, `followTime` timestamp, primary key(`indexID`) )default charset=utf8;",
 		'notification'=>"create table `notification`( `notificationID` int not null auto_increment, `uid` int not null, `content` text not null, `notiType` ENUM('mension','notification'), `notiTime` timestamp not null, primary key(`notificationID`) )default charset=utf8;",
-		'dynamic'=>"create table `dynamic`( `dynamicID` int not null auto_increment, `uid` int not null, `dynamic` text not null, `time` timestamp, primary key(`dynamicID`) )default charset=utf8;"
+		'dynamic'=>"create table `dynamic`( `dynamicID` int not null auto_increment, `uid` int not null, `dynamic` text not null, `time` timestamp, primary key(`dynamicID`) )default charset=utf8;",
+		'sessions'=>"create table `sessions`( `sessions_id` int not null auto_increment, `data` text not null, `last_accessed` timestamp, primary key(`sessions_id`) )default charset=utf8;"
 		);
 	
 		foreach ($sql as $key => $value) {

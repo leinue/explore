@@ -1,5 +1,6 @@
 <?php
 require('mysql.php');
+require('sessions/sessions.php');
 
 function getIP(){
 	global $ip;
@@ -53,6 +54,10 @@ class accessExplore extends mysqlManager{
 			}
 
 		}else{$this->regResult=false;}
+	}
+
+	function loginIn($email,$password){
+
 	}
 
 }
