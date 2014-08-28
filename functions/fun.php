@@ -230,8 +230,8 @@ class dynamiCls{
 				return true;
 				break;
 		}
-
 	}
+
 }
 
 /**
@@ -428,6 +428,14 @@ class collectionCls{
 
 	function isCollected($uid,$collectionID){
 
+		$sql="SELECT * FROM `collection` WHERE `uid`=? and `collectionID`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$stmt->execute(array($uid,$collectionID));
+
+		$result=$stmt->fetch();
+		if($result!=NULL){
+			return true;
+		}else{return false;}
 	}
 
 	function removeCollection($uid,$collectionID){
@@ -630,13 +638,11 @@ class commentCls{
 
 		}else{
 			return false;}
-
 	}
 
 	function isComment($uid,$sharingID){
 
 		$sql="SELECT * FROM `comment` WHERE `uid`=? and `sharingID`=?";
-		echo $sql;
 		$stmt=$this->pdo->prepare($sql);
 		$stmt->execute(array($uid,$sharingID));
 
@@ -644,7 +650,6 @@ class commentCls{
 		if($result!=NULL){
 			return true;
 		}else{return false;}
-
 	}
 
 	function deleteComment($uid,$sharingID){
@@ -659,7 +664,6 @@ class commentCls{
 				return false;}
 		}else{
 			return false;}
-
 	}
 
 }
