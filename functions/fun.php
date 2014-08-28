@@ -691,42 +691,68 @@ class comment{
 /**********************************************************************/
 
 /**
-* like and dislike
+* LAD的父类
 */
-class LAD{
+class PLAD{
 
-	private $pdo;
-	
-	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
-
-	function writeLike($uid,$sharingID){
-		$sql="INSERT INTO `like`( `uid`, `followID`,`followerID`) VALUES ($uid,$uidFollowed,0)";
+	protected function writeData($pdo,$method,$uid,$sharingID){
+		//method=1 like;method=2 dislike
+		switch ($method) {
+			case 1:
+				$sql="INSERT INTO `_like`( `uid`, `sharingID`) VALUES ($uid,$sharingID)";
+				break;
+			case 2:
+				$sql="INSERT INTO `dislike`( `uid`, `sharingID`) VALUES ($uid,$sharingID)";
+				break;
+		}
 
 		try {
-			$rows=$this->pdo->exec($sql);
+			$rows=$pdo->exec($sql);
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
 		
 		if($rows!=0){
-			$sql="INSERT INTO `follow`( `uid`,`followID`, `followerID`) VALUES ($uidFollowed,0,$uid)";
-			$rows=$this->pdo->exec($sql);
+
+			switch ($method) {
+				case 1:
+					$sql="UPDATE `sharing` SET `likeAmount`=`likeAmount`+1 WHERE `uid`=$uid and `sharingID`=$sharingID";
+					break;
+				case 2:
+					$sql="UPDATE `sharing` SET `dislikeAmount`=`dislikeAmount`+1 WHERE `uid`=$uid and `sharingID`=$sharingID";
+					break;
+			}
+
+			$rows=$pdo->exec($sql);
 			if($rows!=0){return true;}else{
 				return false;
 			}
 		}else{return false;}
 	}
 
-	function writeDislike($uid,$sharingID){
+	protected function loadData($pdo,$method,$uid){
+		//method=1 like;method=2 dislike
 
-	}
+		switch ($method) {
+			case 1:
+				$sql="SELECT * FROM `_like` WHERE `uid`=?";
+				break;
+			case 2:
+				$sql="SELECT * FROM `dislike` WHERE `uid`=?";
+				break;
+		}
 
-	function loadLike($uid){
-		$sql="SELECT * FROM `like` WHERE `uid`=?";
-		$stmt=$this->pdo->prepare($sql);
+		$stmt=$pdo->prepare($sql);
 		$res=$stmt->execute(array($uid));
 
-		$stmt->setFetchMode(PDO::FETCH_CLASS,'like');
+		switch ($method) {
+			case 1:
+				$stmt->setFetchMode(PDO::FETCH_CLASS,'like');
+				break;
+			case 2:
+				$stmt->setFetchMode(PDO::FETCH_CLASS,'dislike');
+				break;
+		}
 
 		if ($res) {
 			if($_attention=$stmt->fetchAll()) {
@@ -737,44 +763,78 @@ class LAD{
 			return false;}
 	}
 
-	function loadDislike($uid){
-		$sql="SELECT * FROM `dislike` WHERE `uid`=?";
+	protected function check($pdo,$method,$uid,$sharingID){
+		//method=1 like;method=2 dislike
+		switch ($method) {
+			case 1:
+				$sql="SELECT * FROM `_like` WHERE `sharingID`=? and `uid`=?";
+				break;
+			case 2:
+				$sql="SELECT * FROM `dislike` WHERE `sharingID`=? and `uid`=?";
+				break;
+		}
+
 		$stmt=$this->pdo->prepare($sql);
-		$res=$stmt->execute(array($uid));
+		$stmt->execute(array($sharingID,$uid));
 
-		$stmt->setFetchMode(PDO::FETCH_CLASS,'dislike');
+		$result=$stmt->fetch();
+		if($result!=NULL){
+			return true;
+		}else{return false;}
+	}
 
-		if ($res) {
-			if($_attention=$stmt->fetchAll()) {
-				return $_attention;
-			}else{
-				return false;}
+	protected function undo($pdo,$method,$uid,$sharingID){
+		//method=1 like;method=2 dislike
+		switch ($method) {
+			case 1:
+				$sql="DELETE FROM `_like` WHERE `uid`=$uid and `sharingID`=$sharingID";
+				break;
+			case 2:
+				$sql="DELETE FROM `dislike` WHERE `uid`=$uid and `sharingID`=$sharingID";
+				break;
+		}
+
+		$rows=$this->pdo->exec($sql);
+
+		if($rows!=0){
+
+			switch ($method) {
+				case 1:
+					$sql="UPDATE `sharing` SET `likeAmount`=`likeAmount`-1 WHERE `uid`=$uid and `sharingID`=$sharingID";
+					break;
+				case 2:
+					$sql="UPDATE `sharing` SET `dislikeAmount`=`dislikeAmount`-1 WHERE `uid`=$uid and `sharingID`=$sharingID";
+					break;
+			}
+
+			$rows=$pdo->exec($sql);
+			if($rows!=0){return true;}else{
+				return false;
+			}
+		}else{return false;}
+	}
+
+	protected function numIssue($pdo,$method,$uid,$sharingID){
+		//method=1 like;method=2 dislike
+		switch ($method) {
+			case 1:
+				$sql="SELECT * FROM `_like` WHERE `uid`=? and `sharingID`=?";
+				break;
+			case 2:
+				$sql="SELECT * FROM `dislike` WHERE `uid`=? and `sharingID`=?";
+				break;
+		}
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$stmt->execute(array($uid,$sharingID));
+			$row=$stmt->fetchAll();
+			if($row){
+				return count($row);
+			}else{return false;}
 		}else{
-			return false;}
-	}
-
-	function isLike($uid,$sharingID){
-
-	}
-
-	function isDislike($uid,$sharingID){
-
-	}
-
-	function unLike($uid,$sharingID){
-
-	}
-
-	function unDislike($uid,$sharingID){
-
-	}
-
-	function getLikeNum($uid,$sharingID){
-
-	}
-
-	function getDislikeNum($uid,$sharingID){
-
+			return false;}		
 	}
 }
 
@@ -791,6 +851,36 @@ class like{
 
 	function getTime(){return $this->time;}
 
+}
+
+/**
+* like and dislike
+*/
+class LAD entends PLAD{
+
+	private $pdo;
+	
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
+
+	function writeLike($uid,$sharingID){return parent::writeData($this->pdo,1,$uid,$sharingID);}
+
+	function writeDislike($uid,$sharingID){return parent::writeData($this->pdo,2,$uid,$sharingID);}
+
+	function loadLike($uid){return parent::loadData($this->pdo,1,$uid);}
+
+	function loadDislike($uid){return parent::loadData($this->pdo,2,$uid);}
+
+	function isLike($uid,$sharingID){return parent::check($this->pdo,1,$uid,$sharingID);}
+
+	function isDislike($uid,$sharingID){return parent::check($this->pdo,2,$uid,$sharingID);}
+
+	function unLike($uid,$sharingID){return parent::undo($this->pdo,1,$uid,$sharingID);}
+
+	function unDislike($uid,$sharingID){return parent::undo($this->pdo,2,$uid,$sharingID);}
+
+	function getLikeNum($uid,$sharingID){return parent::numIssue($this->pdo,1,$uid,$sharingID);}
+
+	function getDislikeNum($uid,$sharingID){return parent::numIssue($this->pdo,2,$uid,$sharingID);}
 }
 
 class dislike{
