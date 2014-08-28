@@ -355,7 +355,14 @@ class sharingCls{
 	}
 
 	function getSharingAmount($uid){
-		
+
+		$sql="SELECT `sharingNum`FROM `basicprofile` WHERE `uid`=$uid";
+		$r=$this->pdo->query($sql);
+
+		if($row=$r->fetch()){
+			return $row[0];
+		}else return false;
+
 	}
 
 }
@@ -624,4 +631,5 @@ $sha=new sharingCls($pdo);
 //$sha->deleteSharing(9,3);
 //$_sharing=$sha->loadSharing(9);
 //print_r($_sharing[1]->getContent());
+//$sha->getSharingAmount(9);
 ?>
