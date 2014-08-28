@@ -287,6 +287,54 @@ class collection{
 	function getSharingID(){return $this->sharingID;}
 }
 
+/*************************************************************************/
+
+/**
+* sharing
+*/
+class sharingCls{
+
+	private $pdo;
+	
+	function __construct($_pdo){$this->pdo=$_pdo;}
+
+	function newSharing($uid,$type,$content,$img){
+		$sql="INSERT INTO `sharing`( `uid`, `sharingType`, `content`, `img`, `commentAmount`, `likeAmount`, `dislikeAmount`, `tipOff`) 
+		VALUES (?,?,?,?,0,0,0,0)";
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			if($stmt->execute(array($uid,$type,$content,$img))){
+
+				$sql="UPDATE `basicprofile` SET `sharingNum`=`sharingNum`+1 WHERE `uid=`$uid";
+				$rows=$this->pdo->exec($sql);
+				switch ($rows) {
+					case 0:
+						return false;
+						break;
+					default:
+						return true;
+						break;
+				}
+
+			}else{return false;}
+		}else{return false;}
+	}
+
+	function deleteSharing($uid,$sharingID){
+
+	}
+
+	function loadSharing($uid){
+
+	}
+
+	function getSharingAmount($uid){
+
+	}
+
+}
+
 class sharing{
 
 	private $sharingID;
@@ -298,7 +346,7 @@ class sharing{
 	private $commentAmount;
 	private $likeAmount;
 	private $dislikeAmount;
-	private $tipOff;
+	private $tipOff;//举报
 	
 	function getSharingID(){return $this->sharingID;}
 
@@ -321,6 +369,8 @@ class sharing{
 	function getTipOff(){return $this->tipOff;}
 
 }
+
+/*************************************************************************/
 
 class comment{
 
@@ -543,4 +593,7 @@ $fo=new followCls($pdo);
 //$fo->isFollow(1,2)
 //$foo=$fo->loadFollow(1);
 //$fo->removeFans(2,1);
+
+$sha=new sharingCls($pdo);
+if($sha->newSharing(1,'public','hhhhh','')){echo 'dsdsds';}
 ?>
