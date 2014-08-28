@@ -794,7 +794,7 @@ class PLAD{
 				break;
 		}
 
-		$rows=$this->pdo->exec($sql);
+		$rows=$pdo->exec($sql);
 
 		if($rows!=0){
 
@@ -825,7 +825,7 @@ class PLAD{
 				break;
 		}
 
-		$stmt=$this->pdo->prepare($sql);
+		$stmt=$pdo->prepare($sql);
 
 		if($stmt){
 			$stmt->execute(array($uid,$sharingID));
@@ -856,7 +856,7 @@ class like{
 /**
 * like and dislike
 */
-class LAD entends PLAD{
+class LAD extends PLAD{
 
 	private $pdo;
 	
@@ -881,6 +881,7 @@ class LAD entends PLAD{
 	function getLikeNum($uid,$sharingID){return parent::numIssue($this->pdo,1,$uid,$sharingID);}
 
 	function getDislikeNum($uid,$sharingID){return parent::numIssue($this->pdo,2,$uid,$sharingID);}
+
 }
 
 class dislike{
@@ -1146,5 +1147,7 @@ $cm=new commentCls($pdo);
 //if($cm->isComment(9,4)){echo 'dsds';}
 //$cm->deleteComment(9,4);
 
-
+$ladd=new LAD($pdo);
+//$ladd->writeLike(9,4);
+//$ladd->unLike(9,4);
 ?>
