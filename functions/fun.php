@@ -138,12 +138,13 @@ class accessExplore extends mysqlManager{
 		$stmt->setFetchMode(PDO::FETCH_CLASS,'dynamic');
 
 		if ($res) {
-			if($_dynamic=$stmt->fetch()) {
+			if($_dynamic=$stmt->fetchAll()) {
 				return $_dynamic;
 			}else{
 				return false;}
 		}else{
-			return false;}		
+			return false;}
+
 	}
 
 }
@@ -306,7 +307,7 @@ class sharingCls{
 		if($stmt){
 			if($stmt->execute(array($uid,$type,$content,$img))){
 
-				$sql="UPDATE `basicprofile` SET `sharingNum`=`sharingNum`+1 WHERE `uid=`$uid";
+				$sql="UPDATE `basicprofile` SET `sharingNum`=`sharingNum`+1 WHERE `uid`=$uid";
 				$rows=$this->pdo->exec($sql);
 				switch ($rows) {
 					case 0:
@@ -322,15 +323,39 @@ class sharingCls{
 	}
 
 	function deleteSharing($uid,$sharingID){
+		$sql="DELETE FROM `sharing` WHERE `uid`=$uid and `sharingID`=$sharingID";
+		$rows=$this->pdo->exec($sql);
 
+		if($rows!=0){
+			$sql="UPDATE `basicprofile` SET `sharingNum`=`sharingNum`-1 WHERE `uid`=$uid";
+			$rows=$this->pdo->exec($sql);
+			if($rows!=0){return true;}else{
+				return false;}
+		}else{
+			return false;}
 	}
 
 	function loadSharing($uid){
 
+		$sql_sharing="SELECT * FROM `sharing` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql_sharing);
+
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'sharing');
+
+		if ($res) {
+			if($_sharing=$stmt->fetchAll()) {
+				return $_sharing;
+			}else{
+				return false;}
+		}else{
+			return false;}
+
 	}
 
 	function getSharingAmount($uid){
-
+		
 	}
 
 }
@@ -517,7 +542,7 @@ class followCls{
 		$stmt->setFetchMode(PDO::FETCH_CLASS,'follow');
 
 		if ($res) {
-			if($_follow=$stmt->fetch()) {
+			if($_follow=$stmt->fetchAll()) {
 				return $_follow;
 			}else{
 				return false;}
@@ -595,5 +620,8 @@ $fo=new followCls($pdo);
 //$fo->removeFans(2,1);
 
 $sha=new sharingCls($pdo);
-if($sha->newSharing(1,'public','hhhhh','')){echo 'dsdsds';}
+//$sha->newSharing(9,'public','hhhhhhhhhhhhh','');
+//$sha->deleteSharing(9,3);
+//$_sharing=$sha->loadSharing(9);
+//print_r($_sharing[1]->getContent());
 ?>
