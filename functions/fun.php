@@ -320,8 +320,6 @@ class sharing{
 
 	function getTipOff(){return $this->tipOff;}
 
-	function getTipOff(){return $this->tipOff;}
-
 }
 
 class comment{
@@ -342,15 +340,16 @@ class comment{
 
 	function getTiem(){return $this->tiem;}
 
-	function getTiem(){return $this->tiem;}
-
 }
+
+/**********************************************************************/
 
 class like{
 
 	private $likeID;
 	private $sharingID;
 	private $time;
+	private $count;
 	
 	function getLikeID(){return $this->likeID;}
 
@@ -358,8 +357,9 @@ class like{
 
 	function getTime(){return $this->time;}
 
-	function getTime(){return $this->time;}
+	function getCount(){
 
+	}
 }
 
 class dislike{
@@ -367,6 +367,7 @@ class dislike{
 	private $dislikeID;
 	private $sharingID;
 	private $time;
+	private $count;
 	
 	function getDislikeID(){return $this->dislikeID;}
 
@@ -374,9 +375,13 @@ class dislike{
 
 	function getTime(){return $this->time;}
 
-	function getTime(){return $this->time;}
+	function getCount(){
+
+	}
 
 }
+
+/**********************************************************************/
 
 class noAttentionTo{
 
@@ -390,7 +395,98 @@ class noAttentionTo{
 
 	function getUid(){return $this->uid;}
 
-	function getUid(){return $this->uid;}
+}
+
+/**
+* follow
+*/
+class followCls{
+
+	private $pdo;
+	
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
+
+	function follow($uid,$uidFollowed){
+		$sql="INSERT INTO `follow`( `uid`, `followID`,`followerID`) VALUES ($uid,$uidFollowed,0)";
+
+		try {
+			$rows=$this->pdo->exec($sql);
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+		}
+		
+		if($rows!=0){
+			$sql="INSERT INTO `follow`( `uid`,`followID`, `followerID`) VALUES ($uidFollowed,0,$uid)";
+			$rows=$this->pdo->exec($sql);
+			if($rows!=0){return true;}else{
+				return false;
+			}
+		}else{return false;}
+	}
+
+	function unFollow($uid,$uidUnFollowed){//返回受影响的行数
+		$sql="DELETE FROM `follow` WHERE `uid`=$uid and `followID`=$uidUnFollowed";
+		$rows=$this->pdo->exec($sql);
+		
+		if($rows!=0){
+			$sql="DELETE FROM `follow` WHERE `uid`=$uidUnFollowed and `followerID`=$uid";
+			$rows=$this->pdo->exec($sql);
+			if($rows!=0){return true;}else{
+				return false;
+			}
+		}else{return false;}
+	}
+
+	function isFollow($uid,$uidChecked){
+		$sql="SELECT * FROM `follow` WHERE `uid`=? and `followID`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$stmt->execute(array($uid,$uidChecked));
+
+		$result=$stmt->fetch();
+		if($result!=NULL){
+			return true;
+		}else{return false;}
+	}
+
+	function isFollower($uid,$uidChecked){
+		$sql="SELECT * FROM `follow` WHERE `uid`=? and `followerID`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$stmt->execute(array($uid,$uidChecked));
+
+		$result=$stmt->fetch();
+		if($result!=NULL){
+			return true;
+		}else{return false;}		
+	}
+	
+	function loadFollow($uid){
+		$sql="SELECT * FROM `follow` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'follow');
+
+		if ($res) {
+			if($_follow=$stmt->fetch()) {
+				return $_follow;
+			}else{
+				return false;}
+		}else{
+			return false;}
+	}
+
+	function removeFans($uid,$uidRemoved){//返回受影响的行数
+		$sql="DELETE FROM `follow` WHERE `uid`=$uid and `followerID`=$uidRemoved";
+		$rows=$this->pdo->exec($sql);
+		
+		if($rows!=0){
+			$sql="DELETE FROM `follow` WHERE `uid`=$uidRemoved and `followID`=$uid";
+			$rows=$this->pdo->exec($sql);
+			if($rows!=0){return true;}else{
+				return false;
+			}
+		}else{return false;}
+	}
 
 }
 
@@ -398,7 +494,8 @@ class follow{
 
 	private $indexID;
 	private $uid;
-	private $followID;
+	private $followID; 
+	private $followerID;
 	private $followTime;
 	
 	function getIndexID(){return $this->indexID;}
@@ -409,7 +506,13 @@ class follow{
 
 	function getFollowTime(){return $this->followTime;}
 
-	function getFollowTime(){return $this->followTime;}
+	function getFollowerCount(){
+
+	}
+
+	function getFollowCount(){
+
+	}
 
 }
 
@@ -433,4 +536,11 @@ $user_=$accEx->loginIn('597055914@qq.com','775521x');
 //echo $dynamic_->getDynamic();
 //session_start();
 //echo $user_->getName();
+
+$fo=new followCls($pdo);
+//$fo->follow(1,2);
+//$fo->unFollow(1,2);
+//$fo->isFollow(1,2)
+//$foo=$fo->loadFollow(1);
+//$fo->removeFans(2,1);
 ?>
