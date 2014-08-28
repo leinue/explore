@@ -198,7 +198,7 @@ class dynamiCls{
 	
 	private $pdo;
 
-	function __construct(){$this->pdo=$_pdo;}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function loadDynamic($uid){
 
@@ -661,5 +661,6 @@ $sha=new sharingCls($pdo);
 //$sha->getSharingAmount(9);
 
 $dy=new dynamiCls($pdo);
-$dy->writeDynamic(9,'hhhhh');
+//$_dy=$dy->loadDynamic(9);
+//$dy->writeDynamic(9,'hhhhh');
 ?>
