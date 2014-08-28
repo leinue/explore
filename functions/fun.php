@@ -291,7 +291,6 @@ class notificationCls{
 			return $r;
 		}else{
 			return false;}
-
 	}
 }
 
@@ -344,7 +343,6 @@ class draftCls{
 				return false;}
 		}else{
 			return false;}
-
 	}
 
 	function writeDraft($uid,$content){
@@ -356,15 +354,21 @@ class draftCls{
 			return $r;
 		}else{
 			return false;}
-
 	}
 
-	function removeDraft($uid,$collectionID){
-
+	function removeDraft($uid,$draftID){
+		$sql="DELETE FROM `draft` WHERE `uid`=$uid and `draftID`=$draftID";
+		$rows=$this->pdo->exec($sql);
+		return $rows;
 	}
 
 	function getDraftAmount($uid){
-		
+		$sql="SELECT * FROM `draft` WHERE `uid`=$uid";
+		$r=$this->pdo->query($sql);
+
+		if($row=$r->fetchAll()){
+			return count($row);
+		}else return false;
 	}
 }
 
@@ -414,7 +418,6 @@ class collectionCls{
 				return false;}
 		}else{
 			return false;}
-
 	}
 
 	function writeCollection($uid,$sharingID){
@@ -428,11 +431,19 @@ class collectionCls{
 	}
 
 	function removeCollection($uid,$collectionID){
-
+		$sql="DELETE FROM `collection` WHERE `uid`=$uid and `collectionID`=$collectionID";
+		$rows=$this->pdo->exec($sql);
+		return $rows;
 	}
 
 	function getCollectionAmount($uid){
 
+		$sql="SELECT * FROM `collection` WHERE `uid`=$uid";
+		$r=$this->pdo->query($sql);
+
+		if($row=$r->fetchAll()){
+			return count($row);
+		}else return false;
 	}
 }
 
