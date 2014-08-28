@@ -262,7 +262,7 @@ class notificationCls{
 
 	private $pdo;
 	
-	function __construct($_pdo){$this->pdo=$_pdo;}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function loadNotification($uid){
 
@@ -325,7 +325,7 @@ class draftCls{
 
 	private $pdo;
 	
-	function __construct($_pdo){$this->pdo=$_pdo;}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function loadDraft($uid){
 
@@ -400,7 +400,7 @@ class collectionCls{
 
 	private $pdo;
 	
-	function __construct($_pdo){$this->pdo=$_pdo;}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function loadCollections($uid){
 
@@ -483,7 +483,7 @@ class sharingCls{
 
 	private $pdo;
 	
-	function __construct($_pdo){$this->pdo=$_pdo;}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function newSharing($uid,$type,$content,$img){
 		$sql="INSERT INTO `sharing`( `uid`, `sharingType`, `content`, `img`, `commentAmount`, `likeAmount`, `dislikeAmount`, `tipOff`) 
@@ -597,7 +597,7 @@ class commentCls{
 	
 	private $pdo;
 
-	function __construct($_pdo){$this->pdo=$_pdo;}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function loadComment($sharingID){
 
@@ -690,12 +690,100 @@ class comment{
 
 /**********************************************************************/
 
+/**
+* like and dislike
+*/
+class LAD{
+
+	private $pdo;
+	
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
+
+	function writeLike($uid,$sharingID){
+		$sql="INSERT INTO `like`( `uid`, `followID`,`followerID`) VALUES ($uid,$uidFollowed,0)";
+
+		try {
+			$rows=$this->pdo->exec($sql);
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+		}
+		
+		if($rows!=0){
+			$sql="INSERT INTO `follow`( `uid`,`followID`, `followerID`) VALUES ($uidFollowed,0,$uid)";
+			$rows=$this->pdo->exec($sql);
+			if($rows!=0){return true;}else{
+				return false;
+			}
+		}else{return false;}
+	}
+
+	function writeDislike($uid,$sharingID){
+
+	}
+
+	function loadLike($uid){
+		$sql="SELECT * FROM `like` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'like');
+
+		if ($res) {
+			if($_attention=$stmt->fetchAll()) {
+				return $_attention;
+			}else{
+				return false;}
+		}else{
+			return false;}
+	}
+
+	function loadDislike($uid){
+		$sql="SELECT * FROM `dislike` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'dislike');
+
+		if ($res) {
+			if($_attention=$stmt->fetchAll()) {
+				return $_attention;
+			}else{
+				return false;}
+		}else{
+			return false;}
+	}
+
+	function isLike($uid,$sharingID){
+
+	}
+
+	function isDislike($uid,$sharingID){
+
+	}
+
+	function unLike($uid,$sharingID){
+
+	}
+
+	function unDislike($uid,$sharingID){
+
+	}
+
+	function getLikeNum($uid,$sharingID){
+
+	}
+
+	function getDislikeNum($uid,$sharingID){
+
+	}
+}
+
 class like{
 
 	private $likeID;
+	private $uid;
 	private $sharingID;
 	private $time;
-	private $count;
 	
 	function getLikeID(){return $this->likeID;}
 
@@ -703,27 +791,20 @@ class like{
 
 	function getTime(){return $this->time;}
 
-	function getCount(){
-
-	}
 }
 
 class dislike{
 
 	private $dislikeID;
+	private $uid;
 	private $sharingID;
 	private $time;
-	private $count;
 	
 	function getDislikeID(){return $this->dislikeID;}
 
 	function getSharingID(){return $this->sharingID;}
 
 	function getTime(){return $this->time;}
-
-	function getCount(){
-
-	}
 
 }
 
@@ -736,7 +817,7 @@ class noAttentionToCls{
 
 	private $pdo;
 	
-	function __construct($_pdo){$this->pdo=$_pdo;}
+	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
 	function loadAttention($uid){
 		$sql="SELECT * FROM `noattentionto` WHERE `uid`=?";
@@ -974,4 +1055,6 @@ $cm=new commentCls($pdo);
 //$cm->writeComment(9,4,'23333333');
 //if($cm->isComment(9,4)){echo 'dsds';}
 //$cm->deleteComment(9,4);
+
+
 ?>
