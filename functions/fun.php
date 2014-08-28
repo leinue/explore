@@ -431,6 +431,88 @@ class sharing{
 
 /*************************************************************************/
 
+/**
+* comment
+*/
+class commentCls{
+	
+	private $pdo;
+
+	function __construct($_pdo){$this->pdo=$_pdo;}
+
+	function loadComment($sharingID){
+
+		$sql="SELECT * FROM `comment` WHERE `sharingID`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$res=$stmt->execute(array($sharingID));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'comment');
+
+		if ($res) {
+			if($_comment=$stmt->fetchAll()) {
+				return $_comment;
+			}else{
+				return false;}
+		}else{
+			return false;}
+
+	}
+
+	function writeComment($uid,$sharingID,$content){
+
+		$sql="INSERT INTO `comment`(`uid`, `sharingID`, `content`) VALUES (?,?,?)";
+		$stmt=$this->pdo->prepare($sql);
+		$result=$stmt->execute(array($uid,$sharingID,$content));
+
+		if($result){
+
+			$sql="UPDATE `sharing` SET `commentAmount`=`commentAmount`+1 WHERE `uid`=$uid and `sharingID`=$sharingID";
+			$rows=$this->pdo->exec($sql);
+			switch ($rows) {
+				case 0:
+					return false;
+					break;
+				default:
+					return true;
+					break;
+			}
+
+		}else{
+			return false;}
+
+	}
+
+	function isComment($uid,$sharingID){
+
+		$sql="SELECT * FROM `comment` WHERE `uid`=? and `sharingID`=?";
+		echo $sql;
+		$stmt=$this->pdo->prepare($sql);
+		$stmt->execute(array($uid,$sharingID));
+
+		$result=$stmt->fetch();
+		if($result!=NULL){
+			return true;
+		}else{return false;}
+
+	}
+
+	function deleteComment($uid,$sharingID){
+
+		$sql="DELETE FROM `comment` WHERE `uid`=$uid and `sharingID`=$sharingID";
+		$rows=$this->pdo->exec($sql);
+
+		if($rows!=0){
+			$sql="UPDATE `sharing` SET `commentAmount`=`commentAmount`-1 WHERE `uid`=$uid and `sharingID`=$sharingID";
+			$rows=$this->pdo->exec($sql);
+			if($rows!=0){return true;}else{
+				return false;}
+		}else{
+			return false;}
+
+	}
+
+}
+
 class comment{
 
 	private $commentID;
@@ -492,6 +574,50 @@ class dislike{
 
 /**********************************************************************/
 
+/**
+* noAttentionTo
+*/
+class noAttentionToCls{
+
+	private $pdo;
+	
+	function __construct($_pdo){$this->pdo=$_pdo;}
+
+	function loadAttention($uid){
+		$sql="SELECT * FROM `noattentionto` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'noAttentionTo');
+
+		if ($res) {
+			if($_attention=$stmt->fetchAll()) {
+				return $_attention;
+			}else{
+				return false;}
+		}else{
+			return false;}
+	}
+
+	function writeAttention($uid,$sharingID){
+		$sql="INSERT INTO `noattentionto`(`sharingID`, `uid`) VALUES ($sharingID,$uid)";
+		$rows=$this->pdo->exec($sql);
+		return $rows;
+	}
+
+	function isNoAttention($uid,$sharingID){
+		//检查sharingID是否对uid不再提醒
+		$sql="SELECT * FROM `noattentionto` WHERE `sharingID`=? and `uid`=?";
+		$stmt=$this->pdo->prepare($sql);
+		$stmt->execute(array($sharingID,$uid));
+
+		$result=$stmt->fetch();
+		if($result!=NULL){
+			return true;
+		}else{return false;}
+	}
+}
+
 class noAttentionTo{
 
 	private $attentionID;
@@ -506,6 +632,7 @@ class noAttentionTo{
 
 }
 
+/**********************************************************************/
 /**
 * follow
 */
@@ -597,6 +724,33 @@ class followCls{
 		}else{return false;}
 	}
 
+	function getCount($method,$uid){
+		//method=2 follow;method=1 follower
+		switch ($method) {
+			case 1:
+				$sql="SELECT `followerID` FROM `follow` WHERE `uid`=?";
+				break;
+			case 2:
+				$sql="SELECT `followID` FROM `follow` WHERE `uid`=?";
+				break;
+		}
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$stmt->execute(array($uid));
+			$row=$stmt->fetchAll();
+			if($row){
+				return count($row);
+			}else{return false;}
+		}else{
+			return false;}
+	}
+
+	function getFollowerCount($uid){$this->getCount(1,$uid);}
+
+	function getFollowCount($uid){$this->getCount(2,$uid);}
+
 }
 
 class follow{
@@ -614,14 +768,6 @@ class follow{
 	function getFollowID(){return $this->followID;}
 
 	function getFollowTime(){return $this->followTime;}
-
-	function getFollowerCount(){
-
-	}
-
-	function getFollowCount(){
-
-	}
 
 }
 
@@ -652,6 +798,7 @@ $fo=new followCls($pdo);
 //$fo->isFollow(1,2)
 //$foo=$fo->loadFollow(1);
 //$fo->removeFans(2,1);
+//$fo->getFollowerCount(2);
 
 $sha=new sharingCls($pdo);
 //$sha->newSharing(9,'public','hhhhhhhhhhhhh','');
@@ -663,4 +810,13 @@ $sha=new sharingCls($pdo);
 $dy=new dynamiCls($pdo);
 //$_dy=$dy->loadDynamic(9);
 //$dy->writeDynamic(9,'hhhhh');
+
+$na=new noAttentionToCls($pdo);
+//$na->writeAttention(1,2);
+//$na->isNoAttention(1,2)
+
+$cm=new commentCls($pdo);
+//$cm->writeComment(9,4,'23333333');
+//if($cm->isComment(9,4)){echo 'dsds';}
+//$cm->deleteComment(9,4);
 ?>
