@@ -20,7 +20,7 @@ class accessExplore extends mysqlManager{
 
 	function __construct(PDO $_pdo){$this->pdo=$_pdo;}
 
-	function regExplore($email,$name,$password){
+	function regExplore($email,$name,$password){//已写入动态
 
 		if(!($this->emailIsExist($email))){
 
@@ -128,25 +128,6 @@ class accessExplore extends mysqlManager{
 		session_write_close();
 	}
 
-	function loadDynamic($uid){
-
-		$sql_dynamic="SELECT * FROM `dynamic` WHERE `uid`=?";
-		$stmt=$this->pdo->prepare($sql_dynamic);
-
-		$res=$stmt->execute(array($uid));
-
-		$stmt->setFetchMode(PDO::FETCH_CLASS,'dynamic');
-
-		if ($res) {
-			if($_dynamic=$stmt->fetchAll()) {
-				return $_dynamic;
-			}else{
-				return false;}
-		}else{
-			return false;}
-
-	}
-
 }
 
 /**
@@ -208,6 +189,50 @@ class user{
 	function getLastLogin(){return $this->lastLoginTime;}
 }
 
+/*************************************************************************/
+
+/**
+* dynamiCls
+*/
+class dynamiCls{
+	
+	private $pdo;
+
+	function __construct(){$this->pdo=$_pdo;}
+
+	function loadDynamic($uid){
+
+		$sql_dynamic="SELECT * FROM `dynamic` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql_dynamic);
+
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'dynamic');
+
+		if ($res) {
+			if($_dynamic=$stmt->fetchAll()) {
+				return $_dynamic;
+			}else{
+				return false;}
+		}else{
+			return false;}
+	}
+
+	function writeDynamic($uid,$dy){
+
+		$sql="INSERT INTO `dynamic`(`uid`, `dynamic`) VALUES ($uid,'$dy')";
+		$rows=$this->pdo->exec($sql);
+		switch ($rows) {
+			case 0:
+				return false;
+				break;
+			default:
+				return true;
+				break;
+		}
+
+	}
+}
 
 /**
 * dynamic
@@ -227,6 +252,8 @@ class dynamic{
 
 	function getTime(){return $this->time;}
 }
+
+/*************************************************************************/
 
 /**
 * notification
@@ -632,4 +659,7 @@ $sha=new sharingCls($pdo);
 //$_sharing=$sha->loadSharing(9);
 //print_r($_sharing[1]->getContent());
 //$sha->getSharingAmount(9);
+
+$dy=new dynamiCls($pdo);
+$dy->writeDynamic(9,'hhhhh');
 ?>
