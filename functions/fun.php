@@ -256,6 +256,46 @@ class dynamic{
 /*************************************************************************/
 
 /**
+* notificationCls
+*/
+class notificationCls{
+
+	private $pdo;
+	
+	function __construct($_pdo){$this->pdo=$_pdo;}
+
+	function loadNotification($uid){
+
+		$sql_sharing="SELECT * FROM `notification` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql_sharing);
+
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'notification');
+
+		if ($res) {
+			if($_notification=$stmt->fetchAll()) {
+				return $_notification;
+			}else{
+				return false;}
+		}else{
+			return false;}
+	}
+
+	function writeNotification($uid,$content,$type){
+
+		$sql="INSERT INTO `notification`(`uid`,`content`,`notiType`) VALUES (?,?,?)";
+		$stmt=$this->pdo->prepare($sql);
+		if($stmt){
+			$r=$stmt->execute(array($uid,$content,$type));
+			return $r;
+		}else{
+			return false;}
+
+	}
+}
+
+/**
 * notification
 */
 class notification{
@@ -277,6 +317,57 @@ class notification{
 	function getNotiTime(){return $this->notiTime;}
 }
 
+/*************************************************************************/
+
+/**
+* draftCls
+*/
+class draftCls{
+
+	private $pdo;
+	
+	function __construct($_pdo){$this->pdo=$_pdo;}
+
+	function loadDraft($uid){
+
+		$sql_sharing="SELECT * FROM `draft` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql_sharing);
+
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'draft');
+
+		if ($res) {
+			if($_draft=$stmt->fetchAll()) {
+				return $_draft;
+			}else{
+				return false;}
+		}else{
+			return false;}
+
+	}
+
+	function writeDraft($uid,$content){
+
+		$sql="INSERT INTO `draft`(`uid`,`content`) VALUES (?,?)";
+		$stmt=$this->pdo->prepare($sql);
+		if($stmt){
+			$r=$stmt->execute(array($uid,$content));
+			return $r;
+		}else{
+			return false;}
+
+	}
+
+	function removeDraft($uid,$collectionID){
+
+	}
+
+	function getDraftAmount($uid){
+		
+	}
+}
+
 /**
 * draft
 */
@@ -294,6 +385,55 @@ class draft{
 	function getContent(){return $this->content;}
 
 	function getEditTime(){return $this->editTime;}
+}
+
+/*************************************************************************/
+
+/**
+* collectionCls
+*/
+class collectionCls{
+
+	private $pdo;
+	
+	function __construct($_pdo){$this->pdo=$_pdo;}
+
+	function loadCollections($uid){
+
+		$sql_sharing="SELECT * FROM `collection` WHERE `uid`=?";
+		$stmt=$this->pdo->prepare($sql_sharing);
+
+		$res=$stmt->execute(array($uid));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'collection');
+
+		if ($res) {
+			if($_collection=$stmt->fetchAll()) {
+				return $_collection;
+			}else{
+				return false;}
+		}else{
+			return false;}
+
+	}
+
+	function writeCollection($uid,$sharingID){
+		$sql="INSERT INTO `collection`(`uid`,`sharingID`) VALUES ($uid,$sharingID)";
+		$rows=$this->pdo->exec($sql);
+		return $rows;
+	}
+
+	function isCollected($uid,$collectionID){
+
+	}
+
+	function removeCollection($uid,$collectionID){
+
+	}
+
+	function getCollectionAmount($uid){
+
+	}
 }
 
 /**
