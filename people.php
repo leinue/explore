@@ -1,11 +1,8 @@
 <?php
 require("functions/config.php");
+$userAccount=testInput($_GET['people']);
 
-$islogin=1;
-
-$userAccount=$_GET['people'];
-
-if ($islogin) {
+if (!empty($_SESSION)) {
 	$pageTitle="$userAccount - 探索";
 }else{header("Location:index.php");}
 

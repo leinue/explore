@@ -14,6 +14,13 @@ function getIP(){
 	return $ip;
 }
 
+function testInput($data){
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
 class accessExplore extends mysqlManager{
 
 	public $pdo;
@@ -57,9 +64,10 @@ class accessExplore extends mysqlManager{
 
 				}else{return false;}
 			}else{
-				echo '名字重复';
+				return -1;//名字重复
 			}
-		}else{echo '邮箱重复';}
+		}else{
+		return -2;/*邮箱重复*/}
 	}
 
 	function emailIsExist($email){return $this->isExist(1,$email);}
@@ -159,12 +167,12 @@ class userProfile{
 
 	function editProfile($uid,$profile=array()){
 
-		$sql="UPDATE `basicprofile` SET `name`=? `location`=? `sex`=? `intro`=? `detailIntro`=? `nowPlace`=? `place`=? WHERE `uid`=$uid";
+		$sql="UPDATE `basicprofile` SET `name`=? `location`=? `sex`=? `intro`=? `nowPlace`=? `place`=? `detailIntro`=? WHERE `uid`=$uid";
 
 		$stmt=$this->pdo->prepare($sql);
 
 		if($stmt){
-			$exer=$stmt->execute(array($profile,$uid));
+			$exer=$stmt->execute($profile);
 			return $exer;
 		}else{
 			return false;}
@@ -308,6 +316,13 @@ class user{
 	function getRegTime(){return $this->regTime;}
 
 	function getLastLogin(){return $this->lastLoginTime;}
+
+	function getPlaceNum(){
+		if(strlen($this->place)==0){
+			return '0';
+		}else{
+			return strspn($this->place, ',')+1;}
+	}
 }
 
 /*************************************************************************/
@@ -1219,59 +1234,4 @@ class follow{
 
 }
 
-
-$dbname="explore";
-$host="localhost";
-$dbVerifyName="root";
-$dbVerifyPassword="xieyang";
-
-try {
-	$pdo=new PDO("mysql:dbname=$dbname;host=$host",$dbVerifyName,$dbVerifyPassword);
-} catch (PDOException $e) {
-	echo $e->getMessage();
-}
-
-$accEx=new accessExplore($pdo);
-
-//$accEx->regExplore('59705591@qq.com','ivy','7758521x');
-$user_=$accEx->loginIn('597055914@qq.com','775521x');
-//$dynamic_=$accEx->loadDynamic($user_->getUid());
-//echo $dynamic_->getDynamic();
-//session_start();
-//echo $user_->getName();
-
-$fo=new followCls($pdo);
-//$fo->follow(1,2);
-//$fo->unFollow(1,2);
-//$fo->isFollow(1,2)
-//$foo=$fo->loadFollow(1);
-//$fo->removeFans(2,1);
-//$fo->getFollowerCount(2);
-
-$sha=new sharingCls($pdo);
-//$sha->newSharing(9,'public','hhhhhhhhhhhhh','');
-//$sha->deleteSharing(9,3);
-//$_sharing=$sha->loadSharing(9);
-//print_r($_sharing[1]->getContent());
-//$sha->getSharingAmount(9);
-
-$dy=new dynamiCls($pdo);
-//$_dy=$dy->loadDynamic(9);
-//$dy->writeDynamic(9,'hhhhh');
-
-$na=new noAttentionToCls($pdo);
-//$na->writeAttention(1,2);
-//$na->isNoAttention(1,2)
-
-$cm=new commentCls($pdo);
-//$cm->writeComment(9,4,'23333333');
-//if($cm->isComment(9,4)){echo 'dsds';}
-//$cm->deleteComment(9,4);
-
-$ladd=new LAD($pdo);
-//$ladd->writeLike(9,4);
-//$ladd->unLike(9,4);
-
-$up=new userProfile($pdo);
-//$up->checkPassword(9,"7758521x");
 ?>

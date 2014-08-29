@@ -1,11 +1,8 @@
 <?php
 require("functions/config.php");
+$column=testInput($_GET['column']);
 
-$islogin=1;
-
-$column=$_GET['column'];
-
-if($islogin){
+if(!empty($_SESSION)){
 	switch ($column) {
 		case 'explore':
 			$pageTitle="发现 - 探索";

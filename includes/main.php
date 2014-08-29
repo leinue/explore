@@ -1,3 +1,14 @@
+<?php
+
+//载入个人信息
+$logUser=new userProfile($pdo);
+$usercls=$logUser->loadProfile($_SESSION['uid']);
+
+//载入粉丝/关注列表
+$focls=new followCls($pdo);
+//$folist=$focls->loadFollow($_SESSION['uid']);
+
+?>
 
 <maincontent>
 
@@ -10,13 +21,13 @@
 		<div class="main-card">
 
 			<div class="main-card-photo">
-				<img src="user/ivydom/photo.jpg" alt="ivydom" width="70" height="70" class="img-rounded"> 
+				<img src="<?php echo $usercls->getFace(); ?>" alt="<?php echo $usercls->getName(); ?>" width="70" height="70" class="img-rounded"> 
 			</div>
 
 			<div class="main-card-detail-info">
 				<div class="full-name">
-					<span><a href="">ivydom</a></span>
-					<span class="at-account"><a href="">@ivydom</a> - 7小时</span>
+					<span><a href=""><?php echo $usercls->getName(); ?></a></span>
+					<span class="at-account"><a href="">@<?php echo $usercls->getName(); ?></a> - 7小时</span>
 				</div>
 
 				<div class="user-blog-text">
@@ -43,20 +54,20 @@
 		<div class="main-card">
 
 			<div class="main-card-photo">
-				<img src="user/ivydom/photo.jpg" alt="ivydom" width="70" height="70" class="img-rounded"> 
+				<img src="user/ivydom/photo.jpg" alt="<?php echo $usercls->getName(); ?>" width="70" height="70" class="img-rounded"> 
 			</div>
 
 			<div class="main-card-detail-info">
 				<div class="full-name">
-					<span><a href="">ivydom</a></span>
-					<span class="at-account"><a href="">@ivydom</a> - 7小时</span>
+					<span><a href=""><?php echo $usercls->getName(); ?></a></span>
+					<span class="at-account"><a href="">@<?php echo $usercls->getName(); ?></a> - 7小时</span>
 				</div>
 
 				<div class="user-blog-text">
 					<span>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br>dsgdfgfd<br></span>
 				</div>
 				<div class="user-blog-text-plus-img">
-					<img src="user/ivydom/background.jpg" alt="ivydom" width="80" height="80">
+					<img src="user/ivydom/background.jpg" alt="<?php echo $usercls->getName(); ?>" width="80" height="80">
 				</div>
 			</div>
 
@@ -80,29 +91,29 @@
 
 	<div class="right-info">
 		<div class="user-background">
-			<img src="user/ivydom/background.jpg" alt="ivydom" width="320" height="95">
+			<img src="user/ivydom/background.jpg" alt="<?php echo $usercls->getName(); ?>" width="320" height="95">
 		</div>
 
 		<div class="profile-content">
 		    <div class="user-photo">
-		    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="75" height="75">
+		    	<img src="user/ivydom/photo.jpg" alt="<?php echo $usercls->getName(); ?>" class="img-thumbnail" width="75" height="75">
 		    </div>
 		    <div class="basic-profile">
-		    	<a ref=""><h4>ivydom</h4></a>
-		    	<span class="help-block"><a ref="">@ivydom</a></span>
+		    	<a ref=""><h4><?php echo $usercls->getName(); ?></h4></a>
+		    	<span class="help-block"><a ref="">@<?php echo $usercls->getName(); ?></a></span>
 		    </div>
 		    <div class="statelable">
 		    	<div class="detail-state-lable">
 		    		<span class="help-block"><a ref="">去过</a></span>
-		    		<a ref=""><p>0</p></a>
+		    		<a ref=""><p><?php echo $usercls->getPlaceNum(); ?></p></a>
 		    	</div>
 		    	<div class="detail-state-lable">
 		    		<span class="help-block"><a ref="">关注</a></span>
-		    		<a ref=""><p>0</p></a>
+		    		<a ref=""><p><?php $count=$focls->getFollowCount($_SESSION['uid']);if(!$count){echo '0';}else{echo $count;} ?></p></a>
 		    	</div>
 		    	<div class="detail-state-lable">
 		    		<span class="help-block"><a ref="">粉丝</a></span>
-		    		<a ref=""><p>0</p></a>
+		    		<a ref=""><p><?php $count=$focls->getFollowCount($_SESSION['uid']);if(!$count){echo '0';}else{echo $count;} ?></p></a>
 		    	</div>
 		    </div>
 		</div>

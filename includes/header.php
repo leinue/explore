@@ -23,7 +23,7 @@
     </div>
 
 <?php
-if($islogin){
+if(!empty($_SESSION)){
 ?>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -35,7 +35,7 @@ if($islogin){
         <li <?php if($pageTitle=="ivydom - 探索") echo 'class="active"'; ?>><a href="people.php?people=ivydom">个人中心</a></li>
         <li <?php if($pageTitle=="设置 - 探索") echo 'class="active"'; ?>><a href="column.php?column=setting">设置</a></li>
         <li <?php if($pageTitle=="消息通知 - 探索") echo 'class="active"'; ?>><a href="column.php?column=notifications">消息</a></li>
-        <li ><a href="#">退出</a></li>
+        <li ><a href="logout.php">退出</a></li>
       </ul>
     </div>
 <?php
