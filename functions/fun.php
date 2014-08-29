@@ -131,6 +131,127 @@ class accessExplore extends mysqlManager{
 }
 
 /**
+* user profile
+*/
+class userProfile{
+
+	private $pdo;
+
+	function __construct($_pdo){$this->pdo=$_pdo;}
+
+	function loadProfile($uid){
+
+		$sql_login="SELECT * FROM `basicprofile`";
+		$stmt=$this->pdo->prepare($sql_login);
+
+		$res=$stmt->execute(array($email,$password));
+
+		$stmt->setFetchMode(PDO::FETCH_CLASS,'user');
+
+		if ($res) {
+			if($_user=$stmt->fetch()) {
+				return $_user;
+			}else{
+				return false;}
+		}else{
+			return false;}
+	}
+
+	function editProfile($uid,$profile=array()){
+
+		$sql="UPDATE `basicprofile` SET `name`=? `location`=? `sex`=? `intro`=? `detailIntro`=? `nowPlace`=? `place`=? WHERE `uid`=$uid";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($profile,$uid));
+			return $exer;
+		}else{
+			return false;}
+	}
+
+	function VerifyEmail($uid){
+
+		$sql="UPDATE `basicprofile` SET `emailVerified`=1 WHERE `uid`=?";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($uid));
+			return $exer;
+		}else{
+			return false;}
+	}
+
+	function changePassword($uid,$oldPassword,$newPassword){
+
+		$sql="UPDATE `basicprofile` SET `password`=SHA1(?) WHERE `uid`=?";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($newPassword,$uid));
+			return $exer;
+		}else{
+			return false;}
+	}
+
+	function checkPassword($uid,$oldPassword){
+
+		$sql="SELECT `email` FROM `basicprofile` WHERE `uid`=? and `password`=SHA1(?)";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($uid,$oldPassword));
+			if($exer){
+				return $row=$stmt->fetch();
+			}
+		}else{
+			return false;}
+	}
+
+	function changeEmail($uid,$newEmail){
+
+		$sql="UPDATE `basicprofile` SET `email`=? WHERE `uid`=?";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($newEmail,$uid));
+			return $exer;
+		}else{
+			return false;}
+	}
+
+	function editPhoto($uid,$newPhoto){
+
+		$sql="UPDATE `basicprofile` SET `face`=? WHERE `uid`=?";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($newPhoto,$uid));
+			return $exer;
+		}else{
+			return false;}
+	}
+
+	function editBackground($uid,$newBackground){
+
+		$sql="UPDATE `basicprofile` SET `background`=? WHERE `uid`=?";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($newBackground,$uid));
+			return $exer;
+		}else{
+			return false;}
+	}
+}
+
+/**
 * user
 */
 class user{
@@ -1150,4 +1271,7 @@ $cm=new commentCls($pdo);
 $ladd=new LAD($pdo);
 //$ladd->writeLike(9,4);
 //$ladd->unLike(9,4);
+
+$up=new userProfile($pdo);
+//$up->checkPassword(9,"7758521x");
 ?>
