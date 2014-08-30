@@ -90,12 +90,12 @@ if($userID=$user->userIsExist($userAccount)){
 					<?php 
 						$placeAccessed=$usercls->getPlace();
 						$placeNum=$usercls->getPlaceNum();
-						if($placeNum===1){
+						if($placeNum==1){
 							echo '<li>'.$placeAccessed.'</li>';
 						}else{
-							$eachPlace=explode($placeAccessed,',');
+							$eachPlace=explode(',',$placeAccessed);
 							foreach ($eachPlace as $key => $value) {
-								echo '<li>'.$placeAccessed.' | </li>';}
+								echo '<li>'.$value.' | </li>';}
 						}
 					?>
 				</ul>			

@@ -34,7 +34,6 @@ if($_POST['saveProfile']=='saveProfile'){
 
 	foreach ($wholeProfile as $key => $value) {
 		if(strlen($value)==0){
-			echo $key."不能为空";
 			$flag=$flag-1;
 		}
 	}
@@ -46,7 +45,7 @@ if($_POST['saveProfile']=='saveProfile'){
 		}else{
 			echo '修改成功';
 		}
-	}
+	}else{echo '不能留空';}
 
 }
 

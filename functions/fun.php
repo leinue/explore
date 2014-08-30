@@ -337,7 +337,8 @@ class user{
 		if(strlen($this->place)==0){
 			return '0';
 		}else{
-			return strspn($this->place, ',')+1;}
+			return count(explode(',', $this->place));
+		}
 	}
 }
 
