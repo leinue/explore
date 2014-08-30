@@ -16,37 +16,44 @@ $requestQueue=array(
 	'img'=>$img,
 	'sharingID'=>$sharingID);
 
+$flag=0;
+
 foreach ($requestQueue as $key => $value) {
 	if(strlen($value)==0){
-		echo "the value of $key can not be NULL";}
-}
-
-if(!$pdo)){
-	echo '-1';//链接数据库失败
-}elseif(!(empty($_SESSION))){
-	echo '-2'//用户没有登录
-}else{
-	$newSha=new sharingCls($pdo);
-	switch ($method) {
-		case 'delete':
-			if(!($newSha->deleteSharing($uid,$sharingID))){
-				echo '-4'/*删除失败*/
-			}else{
-				echo '1';
-			}
-			break;
-		case 'new':
-			if(!($newSha->newSharing($uid,$type,$content,$img))){
-				echo '-5';/*发送失败*/
-			}else{
-				echo '1';
-			}
-			break;
-		default:
-			return '-3';//METHOD不匹配
-			break;
+		echo "the value of $key can not be NULL";
+		$flag=$flag-1;
+		break;
 	}
 }
 
+if($flag>=0){
+	if(!($pdo)){
+		echo '-1';//链接数据库失败
+	}elseif(!(empty($_SESSION))){
+		echo '-2';//用户没有登录
+	}else{
+		$newSha=new sharingCls($pdo);
+		switch ($method) {
+			case 'delete':
+				if(!($newSha->deleteSharing($uid,$sharingID))){
+					echo '-4';/*删除失败*/
+				}else{
+					echo '1';
+				}
+				break;
+			case 'new':
+				if(!($newSha->newSharing($uid,$type,$content,$img))){
+					echo '-5';/*发送失败*/
+				}else{
+					echo '1';
+				}
+				break;
+			default:
+				return '-3';//METHOD不匹配
+				break;
+		}
+	}
+}
 
+session_write_close();
 ?>
