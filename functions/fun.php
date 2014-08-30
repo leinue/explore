@@ -165,9 +165,9 @@ class userProfile{
 			return false;}
 	}
 
-	function editProfile($uid,$profile=array()){
+	function editProfile($uid,$profile){
 
-		$sql="UPDATE `basicprofile` SET `name`=? `location`=? `sex`=? `intro`=? `nowPlace`=? `place`=? `detailIntro`=? WHERE `uid`=$uid";
+		$sql="UPDATE `basicprofile` SET `name`=?,`location`=?,`sex`=?,`intro`=?,`nowPlace`=?,`place`=?,`detailIntro`=? WHERE `uid`=$uid";
 
 		$stmt=$this->pdo->prepare($sql);
 
