@@ -191,7 +191,7 @@ class userProfile{
 			return false;}
 	}
 
-	function changePassword($uid,$oldPassword,$newPassword){
+	function changePassword($uid,$newPassword){
 
 		$sql="UPDATE `basicprofile` SET `password`=SHA1(?) WHERE `uid`=?";
 
@@ -516,11 +516,16 @@ class draftCls{
 
 	function getDraftAmount($uid){
 		$sql="SELECT * FROM `draft` WHERE `uid`=$uid";
-		$r=$this->pdo->query($sql);
+		$stmt=$this->pdo->prepare($sql);
 
-		if($row=$r->fetchAll()){
-			return count($row);
-		}else return false;
+		if($stmt){
+			$stmt->execute(array($uid));
+			$row=$stmt->fetchAll();
+			if($row){
+				return count($row);
+			}else{return false;}
+		}else{
+			return false;}
 	}
 }
 
@@ -599,11 +604,16 @@ class collectionCls{
 	function getCollectionAmount($uid){
 
 		$sql="SELECT * FROM `collection` WHERE `uid`=$uid";
-		$r=$this->pdo->query($sql);
+		$stmt=$this->pdo->prepare($sql);
 
-		if($row=$r->fetchAll()){
-			return count($row);
-		}else return false;
+		if($stmt){
+			$stmt->execute(array($uid));
+			$row=$stmt->fetchAll();
+			if($row){
+				return count($row);
+			}else{return false;}
+		}else{
+			return false;}
 	}
 }
 

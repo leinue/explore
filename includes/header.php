@@ -25,7 +25,7 @@
 <?php
 if(!empty($_SESSION)){
   $logUser=new userProfile($pdo);
-  $usercls=$logUser->loadProfile($_SESSION['uid']);
+  $usercls=$logUser->loadProfile($_SESSION['userid']);
 ?>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -34,7 +34,7 @@ if(!empty($_SESSION)){
         <li <?php if($pageTitle=="热门地区 - 探索") echo 'class="active"'; ?>><a href="column.php?column=hotaeras">热门地方</a></li>
       </ul>      
       <ul class="nav navbar-nav" id="head-menu-right">
-        <li <?php if($logUser->userIsExist($usercls->getName())){echo 'class="active"';} ?>><a href="people.php?people=<?php echo $usercls->getName(); ?>">个人中心</a></li>
+        <li <?php if($logUser->userIsExist($usercls->getName()) and $pageTitle==$usercls->getName()." - 探索"){echo 'class="active"';} ?>><a href="people.php?people=<?php echo $usercls->getName(); ?>">个人中心</a></li>
         <li <?php if($pageTitle=="设置 - 探索") echo 'class="active"'; ?>><a href="column.php?column=setting">设置</a></li>
         <li <?php if($pageTitle=="消息通知 - 探索") echo 'class="active"'; ?>><a href="column.php?column=notifications">消息</a></li>
         <li ><a href="logout.php">退出</a></li>

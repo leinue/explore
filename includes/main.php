@@ -2,11 +2,11 @@
 
 //载入个人信息
 $logUser=new userProfile($pdo);
-$usercls=$logUser->loadProfile($_SESSION['uid']);
+$usercls=$logUser->loadProfile($_SESSION['userid']);
 
 //载入粉丝/关注列表
 $focls=new followCls($pdo);
-//$folist=$focls->loadFollow($_SESSION['uid']);
+//$folist=$focls->loadFollow($_SESSION['userid']);
 
 ?>
 
@@ -109,11 +109,11 @@ $focls=new followCls($pdo);
 		    	</div>
 		    	<div class="detail-state-lable">
 		    		<span class="help-block"><a ref="">关注</a></span>
-		    		<a ref=""><p><?php $count=$focls->getFollowCount($_SESSION['uid']);if(!$count){echo '0';}else{echo $count;} ?></p></a>
+		    		<a ref=""><p><?php $count=$focls->getFollowCount($_SESSION['userid']);if(!$count){echo '0';}else{echo $count;} ?></p></a>
 		    	</div>
 		    	<div class="detail-state-lable">
 		    		<span class="help-block"><a ref="">粉丝</a></span>
-		    		<a ref=""><p><?php $count=$focls->getFollowCount($_SESSION['uid']);if(!$count){echo '0';}else{echo $count;} ?></p></a>
+		    		<a ref=""><p><?php $count=$focls->getFollowCount($_SESSION['userid']);if(!$count){echo '0';}else{echo $count;} ?></p></a>
 		    	</div>
 		    </div>
 		</div>
