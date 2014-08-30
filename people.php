@@ -98,7 +98,7 @@ if($userID=$user->userIsExist($userAccount)){
 								echo '<li>'.$value.' | </li>';}
 						}
 					?>
-				</ul>			
+				</ul>
 			</div>
 		</div>
 	</div>
