@@ -257,6 +257,22 @@ class userProfile{
 		}else{
 			return false;}
 	}
+
+	function userIsExist($userName){
+
+		$sql="SELECT `uid` FROM `basicprofile` WHERE `name`=?";
+
+		$stmt=$this->pdo->prepare($sql);
+
+		if($stmt){
+			$exer=$stmt->execute(array($userName));
+			if($exer){
+				return $row=$stmt->fetch();
+			}
+		}else{
+			return false;}		
+	}
+
 }
 
 /**
@@ -678,13 +694,18 @@ class sharingCls{
 
 	function getSharingAmount($uid){
 
-		$sql="SELECT `sharingNum`FROM `basicprofile` WHERE `uid`=$uid";
-		$r=$this->pdo->query($sql);
+		$sql="SELECT `sharingNum`FROM `basicprofile` WHERE `uid`=?";
 
-		if($row=$r->fetch()){
-			return $row[0];
-		}else return false;
+		$stmt=$this->pdo->prepare($sql);
 
+		if($stmt){
+			$stmt->execute(array($uid));
+			$row=$stmt->fetchAll();
+			if($row){
+				return count($row);
+			}else{return false;}
+		}else{
+			return false;}
 	}
 
 }

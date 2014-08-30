@@ -54,7 +54,7 @@ $focls=new followCls($pdo);
 		<div class="main-card">
 
 			<div class="main-card-photo">
-				<img src="user/ivydom/photo.jpg" alt="<?php echo $usercls->getName(); ?>" width="70" height="70" class="img-rounded"> 
+				<img src="<?php echo $usercls->getFace(); ?>" alt="<?php echo $usercls->getName(); ?>" width="70" height="70" class="img-rounded"> 
 			</div>
 
 			<div class="main-card-detail-info">
@@ -91,12 +91,12 @@ $focls=new followCls($pdo);
 
 	<div class="right-info">
 		<div class="user-background">
-			<img src="user/ivydom/background.jpg" alt="<?php echo $usercls->getName(); ?>" width="320" height="95">
+			<img src="<?php echo $usercls->getBackground(); ?>" alt="<?php echo $usercls->getName(); ?>" width="320" height="95">
 		</div>
 
 		<div class="profile-content">
 		    <div class="user-photo">
-		    	<img src="user/ivydom/photo.jpg" alt="<?php echo $usercls->getName(); ?>" class="img-thumbnail" width="75" height="75">
+		    	<img src="<?php echo $usercls->getFace(); ?>" alt="<?php echo $usercls->getName(); ?>" class="img-thumbnail" width="75" height="75">
 		    </div>
 		    <div class="basic-profile">
 		    	<a ref=""><h4><?php echo $usercls->getName(); ?></h4></a>

@@ -1,41 +1,56 @@
 <?php
 require("functions/config.php");
+
 $userAccount=testInput($_GET['people']);
 
-if (!empty($_SESSION)) {
-	$pageTitle="$userAccount - 探索";
-}else{header("Location:index.php");}
+//初始化个人信息
+$user=new userProfile($pdo);
+$usercls=$user->loadProfile($userID);
+
+if($userID=$user->userIsExist($userAccount)){
+
+	//初始化关注/粉丝数据信息
+	$focls=new followCls($pdo);
+
+	//初始化个人分享
+	$shacls=new sharingCls($pdo);
+	$shalist=$shacls->loadSharing($userID);
 
 
-require("includes/header.php");
+	if (!empty($_SESSION)) {
+		$pageTitle="$userAccount - 探索";
+	}else{header("Location:index.php");}
+
+
+	require("includes/header.php");
 ?>
 
 <div class="people-user-background-detail">
 	<div class="people-user-heading">
 		<div class="people-user-heading-left">
-			<img src="user/ivydom/background-blur.jpg" alt="ivydom" width="260" height="265">
+			<img src="user/ivydom/background-blur.jpg" alt="i<?php echo $usercls->getName(); ?>" width="260" height="265">
 			<div class="people-user-heading-left-detail">
 				<div class="people-user-photo">
-					<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="75" height="75">
+					<img src="<?php echo $usercls->getFace(); ?>" alt="<?php echo $usercls->getName(); ?>" class="img-thumbnail" width="75" height="75">
 				</div>
 				<div class="people-user-detail">
-					<div class="people-user-name">ivydom</div>
-					<div class="people-user-description">A Chinese stdudent who can write some computer programms.</div>
-					<div class="people-user-accessed-record">被访问 0 次</div>
+					<div class="people-user-name"><?php echo $usercls->getName(); ?></div>
+					<div class="people-user-description"><?php echo $usercls->getIntro(); ?></div>
+					<div class="people-user-accessed-record">被访问 NULL 次</div>
 				</div>
 			</div>
 		</div>
 		<div class="people-user-heading-right">
-			<img src="user/ivydom/background.jpg" alt="ivydom" width="480" height="265">
+			<img src="<?php echo $usercls->getBackground(); ?>" alt="<?php echo $usercls->getName(); ?>" width="480" height="265">
 		</div>
 	</div>
 
 	<div class="people-user-footer">
 		<ul class="user-nav-pills" id="xxxxxxxx">
-  			<li role="presentation"><a href="">去过 0</a></li>
-  			<li role="presentation"><a href="">粉丝 0</a></li>
-  			<li role="presentation"><a href="">关注 0</a></li>
-  			<li role="presentation"><a href="">信息 0</a></li>
+  			<li role="presentation"><a href="">去过 <?php echo $usercls->getPlaceNum(); ?></a></li>
+  			<li role="presentation"><a href="">粉丝 <?php $count=$focls->getFollowerCount($userID);if(!$count){echo '0';}else{echo $count;} ?></a></li>
+  			<li role="presentation"><a href="">关注 <?php $count=$focls->getFollowCount($userID);if(!$count){echo '0';}else{echo $count;} ?></a></li>
+  			<li role="presentation"><a href="">信息 <?php $count=$shacls->getSharingAmount($userID);if(!$count){echo '0';}else{echo $count;} ?></a></li>
 		</ul>
 	</div>
 </div>
@@ -57,25 +72,32 @@ require("includes/header.php");
 		</div>
 
 		<div class="people-lib-main-card">
-			<div class="lib-card-heading">基本信息<span class="lib-card-heading-right"><a href="">修改</a></span></div>
+			<div class="lib-card-heading">基本信息<span class="lib-card-heading-right"><a href="column.php?column=setting">修改</a></span></div>
 			<div class="lib-card-content">
 				<ul>
-					<li><span class="glyphicon glyphicon-envelope"></span> 23333333@qq.com</li>
-					<li><span class="glyphicon glyphicon-map-marker"></span> 中二之峰学院</li>
-					<li><span class="glyphicon glyphicon-user"></span> ♂</li>
-					<li><span class="glyphicon glyphicon-briefcase"></span> 中二病患者</li>
-					<li><span class="glyphicon glyphicon-credit-card"></span> 专注拾荒三十年</li>					
+					<li><span class="glyphicon glyphicon-envelope"></span> <?php echo $usercls->getEmail(); ?></li>
+					<li><span class="glyphicon glyphicon-map-marker"></span> <?php echo $usercls->getLocation(); ?></li>
+					<li><span class="glyphicon glyphicon-user"></span> <?php echo $usercls->getSex(); ?></li>
+					<li><span class="glyphicon glyphicon-briefcase"></span> <?php echo $usercls->getIntro(); ?></li>
+					<li><span class="glyphicon glyphicon-credit-card"></span> <?php echo $usercls->getRegTime(); ?></li>					
 				</ul>
 			</div>
 		</div>
 		<div class="people-lib-main-card">
-			<div class="lib-card-heading">去过的地方 <span class="lib-card-heading-right">目前:蛤蛤</span></div>
+			<div class="lib-card-heading">去过的地方 <span class="lib-card-heading-right">目前:<?php echo $usercls->getNowPlace(); ?></span></div>
 			<div class="lib-card-content">
 				<ul class="location-accessed">
-					<li>大连 |</li>
-					<li>北京 |</li>
-					<li>上海 |</li>
-					<li>南京</li>
+					<?php 
+						$placeAccessed=$usercls->getPlace();
+						$placeNum=$usercls->getPlaceNum();
+						if($placeNum===1){
+							echo '<li>'.$placeAccessed.'</li>';
+						}else{
+							$eachPlace=explode($placeAccessed,',');
+							foreach ($eachPlace as $key => $value) {
+								echo '<li>'.$placeAccessed.' | </li>';}
+						}
+					?>
 				</ul>			
 			</div>
 		</div>
@@ -171,6 +193,10 @@ require("includes/header.php");
 	</div>
 
 </div>
+<?php }else{
+	header("Location:index.php");
+}
+?>
 
 <script>
 	var twitterContent;
