@@ -705,15 +705,15 @@ class sharingCls{
 
 	function getSharingAmount($uid){
 
-		$sql="SELECT `sharingNum`FROM `basicprofile` WHERE `uid`=?";
+		$sql="SELECT `sharingNum` FROM `basicprofile` WHERE `uid`=?";
 
 		$stmt=$this->pdo->prepare($sql);
 
 		if($stmt){
 			$stmt->execute(array($uid));
-			$row=$stmt->fetchAll();
+			$row=$stmt->fetch();
 			if($row){
-				return count($row);
+				return $row[0];
 			}else{return false;}
 		}else{
 			return false;}

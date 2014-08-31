@@ -14,8 +14,7 @@ if($userID=$user->userIsExist($userAccount)){
 
 	//初始化个人分享
 	$shacls=new sharingCls($pdo);
-	$shalist=$shacls->loadSharing($userID);
-
+	$shalist=$shacls->loadSharing($userID[0]);
 
 	if (!empty($_SESSION)) {
 		$pageTitle="$userAccount - 探索";
@@ -48,9 +47,9 @@ if($userID=$user->userIsExist($userAccount)){
 	<div class="people-user-footer">
 		<ul class="user-nav-pills" id="xxxxxxxx">
   			<li role="presentation"><a href="">去过 <?php echo $usercls->getPlaceNum(); ?></a></li>
-  			<li role="presentation"><a href="">粉丝 <?php $count=$focls->getFollowerCount($userID);if(!$count){echo '0';}else{echo $count;} ?></a></li>
-  			<li role="presentation"><a href="">关注 <?php $count=$focls->getFollowCount($userID);if(!$count){echo '0';}else{echo $count;} ?></a></li>
-  			<li role="presentation"><a href="">信息 <?php $count=$shacls->getSharingAmount($userID);if(!$count){echo '0';}else{echo $count;} ?></a></li>
+  			<li role="presentation"><a href="">粉丝 <?php $count=$focls->getFollowerCount($userID[0]);if(!$count){echo '0';}else{echo $count;} ?></a></li>
+  			<li role="presentation"><a href="">关注 <?php $count=$focls->getFollowCount($userID[0]);if(!$count){echo '0';}else{echo $count;} ?></a></li>
+  			<li role="presentation"><a href="">分享 <?php $count=$shacls->getSharingAmount($userID[0]);if(!$count){echo '0'.$userID;}else{echo $count;} ?></a></li>
 		</ul>
 	</div>
 </div>
@@ -102,12 +101,10 @@ if($userID=$user->userIsExist($userAccount)){
 				</ul>
 			</div>
 		</div>
+		<div class="sharing-panel-left-bottom" id="sharing-panel-left"></div>
 	</div>
 
-	<div class="people-lib-right" id="sharing-panel">
-
-
-	</div>
+	<div class="people-lib-right" id="sharing-panel"></div>
 
 </div>
 <?php }else{
@@ -116,6 +113,17 @@ if($userID=$user->userIsExist($userAccount)){
 ?>
 
 <script>
+	function isOdd(num){
+ 		var a = parseInt(num);
+ 		switch(a%2){
+  		case 0:
+  			return true;
+   			break;
+  		case 1:
+   			return false;
+  	 		break;
+ 		}
+	}
 
 	function my_nl2br($s){  
 		return str_replace("\n",'<br>',str_replace("\r",'<br>',str_replace("\r\n",'<br>',$s)));}
@@ -163,9 +171,15 @@ if($userID=$user->userIsExist($userAccount)){
    	 			var jsonObj=eval("("+xmlhttp.responseText+")");
    	 			for(i in jsonObj){
    	 				for(j in i){
-   	 					var sharingPanelDoc=document.getElementById('sharing-panel');
-   	 					var str='<div class="people-lib-main-card"><div class="people-lib-main-card-twitter-heading"><div class="people-lib-twitter-heading-photo"><img src="'+jsonObj.sharing[j].face+'" alt="'+jsonObj.sharing[j].name+'" class="img-thumbnail" width="46" height="46"></div><div class="people-lib-twitter-detail"><div class="people-lib-twitter-detail-name"><a href="people.php?people='+jsonObj.sharing[j].name+'">'+jsonObj.sharing[j].name+'</a><div class="lib-twitter-detail-name-right"><div class="dropdown"><span class="caret"></span></div></div></div><div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">'+jsonObj.sharing[j].sharingType+'</span>  -  '+jsonObj.sharing[j].time+'</div></div></div><div class="people-lib-main-card-twitter-content">'+jsonObj.sharing[j].content+'</div><div class="people-lib-main-card-twitter-footer"><div class="btn-group"><button type="button" class="btn btn-default">赞('+jsonObj.sharing[j].likeNum+')</button><button type="button" class="btn btn-default">踩('+jsonObj.sharing[j].dislikeNum+')</button><button type="button" class="btn btn-default">收藏</button></div><div class="people-lib-twitter-footer-right"></div><div class="comment-input-enabled" id="id-comment-input-enabled"><textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea><div class="people-lib-send-msg"><ul class="people-lib-send-msg-menu"><li title="#话题"><span class="glyphicon glyphicon-comment"></span></li><li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li></ul><div class="people-lib-send-msg-button"><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div></div></div></div></div>';
-   	 					sharingPanelDoc.innerHTML=sharingPanelDoc.innerHTML+str;
+   	 					if(j<2 || !(isOdd(j))){
+   	 						var sharingPanelDoc=document.getElementById('sharing-panel');
+   	 						var str='<div class="people-lib-main-card"><div class="people-lib-main-card-twitter-heading"><div class="people-lib-twitter-heading-photo"><img src="'+jsonObj.sharing[j].face+'" alt="'+jsonObj.sharing[j].name+'" class="img-thumbnail" width="46" height="46"></div><div class="people-lib-twitter-detail"><div class="people-lib-twitter-detail-name"><a href="people.php?people='+jsonObj.sharing[j].name+'">'+jsonObj.sharing[j].name+'</a><div class="lib-twitter-detail-name-right"><div class="dropdown"><span class="caret"></span></div></div></div><div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">'+jsonObj.sharing[j].sharingType+'</span>  -  '+jsonObj.sharing[j].time+'</div></div></div><div class="people-lib-main-card-twitter-content">'+jsonObj.sharing[j].content+'</div><div class="people-lib-main-card-twitter-footer"><div class="btn-group"><button type="button" class="btn btn-default">赞('+jsonObj.sharing[j].likeNum+')</button><button type="button" class="btn btn-default">踩('+jsonObj.sharing[j].dislikeNum+')</button><button type="button" class="btn btn-default">收藏</button></div><div class="people-lib-twitter-footer-right"></div><div class="comment-input-enabled" id="id-comment-input-enabled"><textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea><div class="people-lib-send-msg"><ul class="people-lib-send-msg-menu"><li title="#话题"><span class="glyphicon glyphicon-comment"></span></li><li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li></ul><div class="people-lib-send-msg-button"><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div></div></div></div></div>';
+   	 						sharingPanelDoc.innerHTML=sharingPanelDoc.innerHTML+str;
+   	 					}else{
+   	 						var sharingPanelDoc=document.getElementById('sharing-panel-left');
+   	 						var str='<div class="people-lib-main-card"><div class="people-lib-main-card-twitter-heading"><div class="people-lib-twitter-heading-photo"><img src="'+jsonObj.sharing[j].face+'" alt="'+jsonObj.sharing[j].name+'" class="img-thumbnail" width="46" height="46"></div><div class="people-lib-twitter-detail"><div class="people-lib-twitter-detail-name"><a href="people.php?people='+jsonObj.sharing[j].name+'">'+jsonObj.sharing[j].name+'</a><div class="lib-twitter-detail-name-right"><div class="dropdown"><span class="caret"></span></div></div></div><div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">'+jsonObj.sharing[j].sharingType+'</span>  -  '+jsonObj.sharing[j].time+'</div></div></div><div class="people-lib-main-card-twitter-content">'+jsonObj.sharing[j].content+'</div><div class="people-lib-main-card-twitter-footer"><div class="btn-group"><button type="button" class="btn btn-default">赞('+jsonObj.sharing[j].likeNum+')</button><button type="button" class="btn btn-default">踩('+jsonObj.sharing[j].dislikeNum+')</button><button type="button" class="btn btn-default">收藏</button></div><div class="people-lib-twitter-footer-right"></div><div class="comment-input-enabled" id="id-comment-input-enabled"><textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea><div class="people-lib-send-msg"><ul class="people-lib-send-msg-menu"><li title="#话题"><span class="glyphicon glyphicon-comment"></span></li><li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li></ul><div class="people-lib-send-msg-button"><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div></div></div></div></div>';
+   	 						sharingPanelDoc.innerHTML=sharingPanelDoc.innerHTML+str;
+   	 					}
    	 				}
    	 			}
 
@@ -203,8 +217,9 @@ if($userID=$user->userIsExist($userAccount)){
 		xmlhttp.onreadystatechange=function(){
   			if (xmlhttp.readyState==4 && xmlhttp.status==200){
    	 			if(xmlhttp.responseText=='1'){
-    				alert('发送成功');
     				document.getElementById('sharing-panel').innerHTML="";
+					document.getElementById('sharing-panel-left').innerHTML="";
+					document.getElementById("twitter-content").value="";
     				getSharing();
     			}else{
     				alert('发送失败');
