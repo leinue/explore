@@ -67,7 +67,7 @@ if($userID=$user->userIsExist($userAccount)){
 					<li title="@某人"><span class="glyphicon glyphicon-volume-up" onclick="atSomeone()"></span></li>
 					<li title="链接(支持音乐/视频)"><span class="glyphicon glyphicon-link"></span></li>
 				</ul>
-				<div class="people-lib-send-msg-button"><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
+				<div class="people-lib-send-msg-button"><button type="button" onclick="sendSharing()" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
 			</div>
 		</div>
 
@@ -229,23 +229,27 @@ if($userID=$user->userIsExist($userAccount)){
 	function atSomeone(){addContent('twitter-content','@');}
 
 
-	function sendSharing(str){
+	function sendSharing(){
 	var xmlhttp;
-	if (str=="") {
+	/*if (str=="") {
   		document.getElementById("txtHint").innerHTML="";
   		return;
-  	}
-	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+  	}*/
+	if (window.XMLHttpRequest){//code for IE7+, Firefox, Chrome, Opera, Safari
   		xmlhttp=new XMLHttpRequest();
-  	}else{// code for IE6, IE5
+  	}else{//code for IE6, IE5
   		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
  	}
 	xmlhttp.onreadystatechange=function(){
   		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-    		document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    		if(xmlhttp.responseText=='1'){
+    			alert('发送成功');
+    		}else{
+    			alert('发送失败');
+    		}
     	}
   	}
-	xmlhttp.open("GET","newSharing.php?method=new&uid=15&content=2333333&type=public&img=0&sharingID=0"+str,true);
+	xmlhttp.open("GET","request/newSharing.php?method=new&uid=15&content=2333333&type=public&img=0&sharingID=0",true);
 	xmlhttp.send();
 	}
 
