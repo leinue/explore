@@ -279,6 +279,10 @@ if($userID=$user->userIsExist($userAccount)){
 		xmlhttp.send();
 	}
 
+	function getSharing(uid){
+
+	}
+
 </script>
 
 <?php
