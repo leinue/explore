@@ -113,6 +113,7 @@ if($userID=$user->userIsExist($userAccount)){
 ?>
 
 <script>
+
 	function isOdd(num){
  		var a = parseInt(num);
  		switch(a%2){
