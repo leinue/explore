@@ -600,3 +600,6 @@ body > #wrap {
 /*****************hotarea-card-main**************/
 
 /**********************hot-area*************************/
+
+.user-id{
+	visibility: hidden;display: none;}

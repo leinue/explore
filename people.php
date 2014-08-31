@@ -34,7 +34,7 @@ if($userID=$user->userIsExist($userAccount)){
 					<img src="<?php echo $usercls->getFace(); ?>" alt="<?php echo $usercls->getName(); ?>" class="img-thumbnail" width="75" height="75">
 				</div>
 				<div class="people-user-detail">
-					<div class="people-user-name"><?php echo $usercls->getName(); ?></div>
+					<div class="people-user-name"><?php echo $usercls->getName(); ?><span id="id-user" class="user-id"><?php echo $usercls->getUid(); ?></span></div>
 					<div class="people-user-description"><?php echo $usercls->getIntro(); ?></div>
 					<div class="people-user-accessed-record">被访问 NULL 次</div>
 				</div>
@@ -66,6 +66,7 @@ if($userID=$user->userIsExist($userAccount)){
 					<li title="#话题"><span class="glyphicon glyphicon-comment" onclick="addTopic()"></span></li>
 					<li title="@某人"><span class="glyphicon glyphicon-volume-up" onclick="atSomeone()"></span></li>
 					<li title="链接(支持音乐/视频)"><span class="glyphicon glyphicon-link"></span></li>
+					<li id="secret-sharing" onclick="setPrivate()" title="设为私密"><span class="glyphicon glyphicon-lock"></span></li>
 				</ul>
 				<div class="people-lib-send-msg-button"><button type="button" onclick="sendSharing()" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
 			</div>
@@ -200,7 +201,7 @@ if($userID=$user->userIsExist($userAccount)){
 
 <script>
 	var twitterContent;
-	twitterContent=document.getElementById('twitter-content').innerHTML;
+	twitterContent=document.getElementById('twitter-content').value;
 	
 	if(twitterContent.length==0){document.getElementById('btn-twitter-send').disabled="true";}
 
@@ -228,29 +229,54 @@ if($userID=$user->userIsExist($userAccount)){
 
 	function atSomeone(){addContent('twitter-content','@');}
 
+	function setPrivate(){
+		var doc=document.getElementById("secret-sharing");
+		var _title=doc.title;
+		if(_title=="设为私密"){
+			doc.style.color="rgb(118,167,250)";
+			doc.title="设为公开";
+		}else{
+			if(_title=="设为公开"){
+			doc.style.color="rgb(162,162,162)";
+			doc.title="设为私密";}
+		}
+	}
 
 	function sendSharing(){
-	var xmlhttp;
-	/*if (str=="") {
-  		document.getElementById("txtHint").innerHTML="";
-  		return;
-  	}*/
-	if (window.XMLHttpRequest){//code for IE7+, Firefox, Chrome, Opera, Safari
-  		xmlhttp=new XMLHttpRequest();
-  	}else{//code for IE6, IE5
-  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
- 	}
-	xmlhttp.onreadystatechange=function(){
-  		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-    		if(xmlhttp.responseText=='1'){
-    			alert('发送成功');
-    		}else{
-    			alert('发送失败');
+
+		var xmlhttp;
+		var content=document.getElementById("twitter-content").value;
+
+		if (content=="") {
+  			alert("分享内容不能为空");
+  			return;
+  		}
+
+  		var uid=document.getElementById("id-user").innerHTML;
+
+  		var type='public';
+
+  		if(document.getElementById("secret-sharing").title=="设为公开"){
+  			type='private';
+  		}else{
+  			type='public';}
+
+		if (window.XMLHttpRequest){//code for IE7+, Firefox, Chrome, Opera, Safari
+  			xmlhttp=new XMLHttpRequest();
+  		}else{//code for IE6, IE5
+  			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ 		}
+		xmlhttp.onreadystatechange=function(){
+  			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+   	 			if(xmlhttp.responseText=='1'){
+    				alert('发送成功');
+    			}else{
+    				alert('发送失败');
+    			}
     		}
-    	}
-  	}
-	xmlhttp.open("GET","request/newSharing.php?method=new&uid=15&content=2333333&type=public&img=0&sharingID=0",true);
-	xmlhttp.send();
+  		}
+		xmlhttp.open("GET","request/newSharing.php?method=new&uid="+uid+"&content="+content+"&type="+type+"&img=0&sharingID=0",true);
+		xmlhttp.send();
 	}
 
 </script>
