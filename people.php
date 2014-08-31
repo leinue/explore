@@ -104,92 +104,8 @@ if($userID=$user->userIsExist($userAccount)){
 		</div>
 	</div>
 
-	<div class="people-lib-right">
+	<div class="people-lib-right" id="sharing-panel">
 
-		<div class="people-lib-main-card">
-			<div class="people-lib-main-card-twitter-heading">
-				<div class="people-lib-twitter-heading-photo">
-			    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46">
-				</div>
-				<div class="people-lib-twitter-detail">
-					<div class="people-lib-twitter-detail-name">
-						<a href="">ivydom</a>
-						<div class="lib-twitter-detail-name-right">
-							<div class="dropdown">
-								<span class="caret"></span>
-							</div>
-						</div>
-					</div>
-					<div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">私密分享</span>  -  2013年4月14日</div>
-				</div>
-			</div>
-
-			<div class="people-lib-main-card-twitter-content">
-				中国人均收入世界排名：1960年第78名，1970年第82，1976 年84，1980年第94，1990年第105，2008年第106，2010年第127；但中国GDP世界排名：1978年第15名，1990年第10，1995年第7，2000年第6，2007年第4，2010年第2。这是一个什么样的中国梦！？﻿
-			</div>
-			<div class="people-lib-main-card-twitter-footer">
-				<div class="btn-group">
-  					<button type="button" class="btn btn-default">赞</button>
-  					<button type="button" class="btn btn-default">踩</button>
- 					<button type="button" class="btn btn-default">收藏</button>
-				</div>
-				<div class="people-lib-twitter-footer-right">
-					<div class="input-group" id="original-comment-layout">
-						<input type="text" class="form-control" onfocus="deployCommentLayout(this)" placeholder="评论">
-    				</div>
-				</div>
-				<div class="comment-input-enabled" id="id-comment-input-enabled">
-					<textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea>
-					<div class="people-lib-send-msg">
-						<ul class="people-lib-send-msg-menu">
-							<li title="#话题"><span class="glyphicon glyphicon-comment"></span></li>
-							<li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li>
-						</ul>
-						<div class="people-lib-send-msg-button"><span onclick="packupCommentLayout()" class="lib-send-msg-button-left">↑收起</span><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
-					</div>
-    			</div>
-			</div>
-		</div>
-
-		<div class="people-lib-main-card">
-			<div class="people-lib-main-card-twitter-heading">
-				<div class="people-lib-twitter-heading-photo">
-			    	<img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46">
-				</div>
-				<div class="people-lib-twitter-detail">
-					<div class="people-lib-twitter-detail-name"><a href="">ivydom</a></div>
-					<div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">私密分享</span>  -  2013年4月14日</div>
-				</div>
-			</div>
-
-			<div class="people-lib-main-card-twitter-content">
-				<span>一个桌面级的操作系统代码规模在千万行数量级，如果加上配套软件，总规模应该超过一亿行，如果再加上一个完整的软件生态系统，那么总规模应该不少于十亿行。那是不是投钱投人就够了？不是.</span>		
-			    <img src="user/ivydom/background.jpg" alt="ivydom" width="120" height="120" />
-			</div>
-
-			<div class="people-lib-main-card-twitter-footer">
-				<div class="btn-group">
-  					<button type="button" class="btn btn-default">赞</button>
-  					<button type="button" class="btn btn-default">踩</button>
- 					<button type="button" class="btn btn-default">收藏</button>
-				</div>
-				<div class="people-lib-twitter-footer-right">
-					<div class="input-group" id="original-comment-layout">
-						<input type="text" class="form-control" onfocus="deployCommentLayout(this)" placeholder="评论">
-    				</div>
-				</div>
-				<div class="comment-input-enabled" id="id-comment-input-enabled">
-					<textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea>
-					<div class="people-lib-send-msg">
-						<ul class="people-lib-send-msg-menu">
-							<li title="#话题"><span class="glyphicon glyphicon-comment"></span></li>
-							<li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li>
-						</ul>
-						<div class="people-lib-send-msg-button"><span onclick="packupCommentLayout()" class="lib-send-msg-button-left">↑收起</span><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div>
-					</div>
-    			</div>
-			</div>
-		</div>
 
 	</div>
 
@@ -200,24 +116,16 @@ if($userID=$user->userIsExist($userAccount)){
 ?>
 
 <script>
+
+	function my_nl2br($s){  
+		return str_replace("\n",'<br>',str_replace("\r",'<br>',str_replace("\r\n",'<br>',$s)));}
+
 	var twitterContent;
 	twitterContent=document.getElementById('twitter-content').value;
 	
 	if(twitterContent.length==0){document.getElementById('btn-twitter-send').disabled="true";}
 
 	function alterBtnStatus(){document.getElementById('btn-twitter-send').disabled=false;}
-
-	function deployCommentLayout(x){
-		x.style.visibility='hidden';
-		document.getElementById('id-comment-input-enabled').style.visibility='visible';
-		document.getElementById('id-comment-input-enabled').style.display='block';
-	}
-
-	function packupCommentLayout(){
-		document.getElementById('original-comment-layout').style.visibility='visible';
-		document.getElementById('id-comment-input-enabled').style.visibility='hidden';
-		document.getElementById('id-comment-input-enabled').style.display='none';
-	}
 
 	function addContent(idName,contentAdded){
 		var doc=document.getElementById(idName);
@@ -240,6 +148,32 @@ if($userID=$user->userIsExist($userAccount)){
 			doc.style.color="rgb(162,162,162)";
 			doc.title="设为私密";}
 		}
+	}
+
+	function getSharing(){
+
+		if (window.XMLHttpRequest){//code for IE7+, Firefox, Chrome, Opera, Safari
+  			xmlhttp=new XMLHttpRequest();
+  		}else{//code for IE6, IE5
+  			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ 		}
+ 		
+		xmlhttp.onreadystatechange=function(){
+  			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+   	 			var jsonObj=eval("("+xmlhttp.responseText+")");
+   	 			for(i in jsonObj){
+   	 				for(j in i){
+   	 					var sharingPanelDoc=document.getElementById('sharing-panel');
+   	 					var str='<div class="people-lib-main-card"><div class="people-lib-main-card-twitter-heading"><div class="people-lib-twitter-heading-photo"><img src="user/ivydom/photo.jpg" alt="ivydom" class="img-thumbnail" width="46" height="46"></div><div class="people-lib-twitter-detail"><div class="people-lib-twitter-detail-name"><a href="">ivydom</a><div class="lib-twitter-detail-name-right"><div class="dropdown"><span class="caret"></span></div></div></div><div class="people-lib-twitter-detail-time-type"><span class="people-lib-card-twiiter-type">'+jsonObj.sharing[j].sharingType+'</span>  -  '+jsonObj.sharing[j].time+'</div></div></div><div class="people-lib-main-card-twitter-content">'+jsonObj.sharing[j].content+'</div><div class="people-lib-main-card-twitter-footer"><div class="btn-group"><button type="button" class="btn btn-default">赞('+jsonObj.sharing[j].likeNum+')</button><button type="button" class="btn btn-default">踩('+jsonObj.sharing[j].dislikeNum+')</button><button type="button" class="btn btn-default">收藏</button></div><div class="people-lib-twitter-footer-right"></div><div class="comment-input-enabled" id="id-comment-input-enabled"><textarea class="form-control" id="twitter-content" rows="3" onkeyup="alterBtnStatus()" required></textarea><div class="people-lib-send-msg"><ul class="people-lib-send-msg-menu"><li title="#话题"><span class="glyphicon glyphicon-comment"></span></li><li title="@某人"><span class="glyphicon glyphicon-volume-up"></span></li></ul><div class="people-lib-send-msg-button"><button type="button" id="btn-twitter-send" class="btn btn-success btn-sm">发布</button></div></div></div></div></div>';
+   	 					sharingPanelDoc.innerHTML=sharingPanelDoc.innerHTML+str;
+   	 				}
+   	 			}
+
+    		}
+  		}
+		xmlhttp.open("GET","request/getSharing.php?uid=15",true);
+		xmlhttp.send();
+
 	}
 
 	function sendSharing(){
@@ -270,6 +204,8 @@ if($userID=$user->userIsExist($userAccount)){
   			if (xmlhttp.readyState==4 && xmlhttp.status==200){
    	 			if(xmlhttp.responseText=='1'){
     				alert('发送成功');
+    				document.getElementById('sharing-panel').innerHTML="";
+    				getSharing();
     			}else{
     				alert('发送失败');
     			}
@@ -279,9 +215,7 @@ if($userID=$user->userIsExist($userAccount)){
 		xmlhttp.send();
 	}
 
-	function getSharing(uid){
-
-	}
+	getSharing();
 
 </script>
 

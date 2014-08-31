@@ -21,17 +21,10 @@ if($flag>=0){
 		$getSha=new sharingCls($pdo);
 		$sharingList=$getSha->loadSharing($uid);
 		foreach ($sharingList as $key => $value) {
-			$jsonData=$jsonData.'{"uid"="'.$value->getUid().'",
-			"time"="'.$value->getTime().'",
-			"sharingType"="'.$value->getSharingType().'",
-			"img"="'.$value->getImg().'",
-			"content"="'.$value->getContent().'",
-			"commentNum"="'.$value->getCommentAmount().'",
-			"likeNum"="'.$value->getLikeAmount().'",
-			"dislikeNum"="'.$value->getDislikeAmount().'"},';
+			$jsonData=$jsonData.'{"uid":"'.$value->getUid().'","time":"'.$value->getTime().'","sharingType":"'.$value->getSharingType().'","img":"'.$value->getImg().'","content":"'.$value->getContent().'","commentNum":"'.$value->getCommentAmount().'","likeNum":"'.$value->getLikeAmount().'","dislikeNum":"'.$value->getDislikeAmount().'"},';
 		}
 		$jsonData=substr_replace($jsonData,"",-1,1);
-		echo "[".$jsonData."]";
+		echo "{sharing:[".$jsonData."]}";
 	}	
 }
 

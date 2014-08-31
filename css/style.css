@@ -392,10 +392,7 @@ body > #wrap {
 	text-decoration: underline;cursor: pointer;}
 
 .comment-input-enabled{
-	padding-top: 15px;
-	visibility: hidden;
-	display: none;/*block*/
-}
+	padding-top: 15px;}
 /*************userlib-twitter***************/
 
 /***********************userlib*************************/
