@@ -23,6 +23,7 @@ if($flag>=0){
 
 		$getUser=new userProfile($pdo);
 		$userlist=$getUser->loadProfile($_SESSION['userid']);
+		arsort($sharingList);
 		foreach ($sharingList as $key => $value) {
 			$jsonData=$jsonData.'{"face":"'.$userlist->getFace().'","name":"'.$userlist->getName().'","uid":"'.$value->getUid().'","time":"'.$value->getTime().'","sharingType":"'.$value->getSharingType().'","img":"'.$value->getImg().'","content":"'.$value->getContent().'","commentNum":"'.$value->getCommentAmount().'","likeNum":"'.$value->getLikeAmount().'","dislikeNum":"'.$value->getDislikeAmount().'"},';
 		}
