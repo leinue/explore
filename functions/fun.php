@@ -426,13 +426,10 @@ class notificationCls{
 
 		$stmt->setFetchMode(PDO::FETCH_CLASS,'notification');
 
-		if ($res) {
-			if($_notification=$stmt->fetchAll()) {
+		if ($res){
+			if($_notification=$stmt->fetchAll()){
 				return $_notification;
-			}else{
-				return false;}
-		}else{
-			return false;}
+			}else{return false;}}else{return false;}
 	}
 
 	function writeNotification($uid,$content,$type){
